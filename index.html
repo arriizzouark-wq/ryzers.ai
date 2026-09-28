@@ -3,1295 +3,1441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryzer's.ai - Next-Gen AI & Gaming Hub</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Ryzer's.ai | Next-Gen AI & Arcade Experience</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        ryzer: {
-                            900: '#070308',
-                            800: '#120712',
-                            700: '#1e0c1f',
-                            600: '#34112e',
-                            maroon: {
-                                DEFAULT: '#831843',
-                                light: '#be123c',
-                                dark: '#4c0519',
-                                glow: '#f43f5e'
-                            },
-                            accent: '#fb7185'
-                        }
+                        'ryzer-dark': '#0a0a0c',
+                        'ryzer-card': '#12070a',
+                        'ryzer-maroon': '#7a0016',
+                        'ryzer-maroon-dark': '#4a000d',
+                        'ryzer-crimson': '#ff1a40',
+                        'ryzer-glow': '#ff003c',
                     },
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
                     },
                     animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 4s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'pulse-glow': 'pulseGlow 2.5s infinite ease-in-out',
+                        'float': 'float 4s infinite ease-in-out',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'radar-sweep': 'radar 3s linear infinite',
                     },
                     keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(255, 26, 64, 0.3), inset 0 0 10px rgba(122, 0, 22, 0.5)' },
+                            '50%': { boxShadow: '0 0 30px rgba(255, 26, 64, 0.7), inset 0 0 20px rgba(255, 0, 60, 0.6)' },
+                        },
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                            '50%': { transform: 'translateY(-8px)' },
                         },
-                        glow: {
-                            '0%': { boxShadow: '0 0 15px rgba(131, 24, 67, 0.4)' },
-                            '100%': { boxShadow: '0 0 30px rgba(244, 63, 94, 0.8)' }
+                        radar: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         body {
-            background-color: #070308;
+            background-color: #0a0a0c;
             color: #f3f4f6;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
+
         .glass-panel {
-            background: rgba(18, 7, 18, 0.7);
+            background: linear-gradient(135deg, rgba(20, 8, 14, 0.75) 0%, rgba(10, 10, 12, 0.85) 100%);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(131, 24, 67, 0.25);
+            border: 1px solid rgba(255, 26, 64, 0.18);
         }
+
         .glass-panel-hover:hover {
-            border-color: rgba(244, 63, 94, 0.5);
-            box-shadow: 0 0 25px rgba(131, 24, 67, 0.3);
+            border-color: rgba(255, 26, 64, 0.45);
+            box-shadow: 0 8px 32px 0 rgba(122, 0, 22, 0.37);
         }
+
+        .maroon-gradient-btn {
+            background: linear-gradient(135deg, #7a0016 0%, #ff1a40 100%);
+            transition: all 0.3s ease;
+        }
+
+        .maroon-gradient-btn:hover {
+            background: linear-gradient(135deg, #a3001e 0%, #ff4060 100%);
+            box-shadow: 0 0 20px rgba(255, 26, 64, 0.5);
+        }
+
+        .neon-text-glow {
+            text-shadow: 0 0 12px rgba(255, 26, 64, 0.7);
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #070308;
+            background: #0a0a0c;
         }
         ::-webkit-scrollbar-thumb {
-            background: #4c0519;
+            background: #4a000d;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #831843;
-        }
-        .robot-eye {
-            animation: blink 4s infinite;
-        }
-        @keyframes blink {
-            0%, 96%, 100% { transform: scaleY(1); }
-            98% { transform: scaleY(0.1); }
+            background: #7a0016;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-rose-600 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between selection:bg-ryzer-crimson selection:text-white">
 
-    <!-- App Root Container -->
-    <div id="app" class="flex-1 flex flex-col">
-
-        <!-- AUTH SCREEN -->
-        <div id="auth-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-[#070308]/95 backdrop-blur-xl p-4">
-            <div class="absolute inset-0 overflow-hidden pointer-events-none">
-                <div class="absolute -top-40 -left-40 w-96 h-96 bg-rose-900/20 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-purple-900/20 rounded-full blur-3xl"></div>
-            </div>
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-ryzer-crimson/20 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
-            <div class="glass-panel w-full max-w-md p-8 rounded-3xl shadow-2xl relative z-10 border border-rose-900/40">
-                <div class="text-center mb-8">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-rose-900 to-rose-600 text-white shadow-lg shadow-rose-900/50 mb-4 animate-float">
-                        <i class="fa-solid fa-brain text-2xl"></i>
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('dashboard')">
+                <div class="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-ryzer-maroon to-ryzer-crimson p-[2px] animate-pulse-glow flex items-center justify-center">
+                    <div class="w-full h-full bg-ryzer-dark rounded-[10px] flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-6 h-6 text-ryzer-crimson"></i>
                     </div>
-                    <h1 class="text-3xl font-extrabold tracking-tight text-white">Ryzer's<span class="text-rose-500">.ai</span></h1>
-                    <p class="text-sm text-gray-400 mt-1">Next-Generation AI Entertainment & Cognition</p>
                 </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Creator ID / Username</label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-rose-500">
-                                <i class="fa-solid fa-user"></i>
-                            </span>
-                            <input type="text" id="auth-username" placeholder="Enter your creator handle..." 
-                                class="w-full pl-11 pr-4 py-3 bg-[#0a0508] border border-rose-900/40 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all text-sm">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Select Avatar Vibe</label>
-                        <div class="grid grid-cols-4 gap-2">
-                            <button type="button" onclick="selectAvatar('fa-robot')" class="avatar-opt p-3 rounded-xl border border-rose-900/40 bg-[#0a0508] hover:border-rose-500 text-rose-400 flex items-center justify-center transition-all selected" data-avatar="fa-robot">
-                                <i class="fa-solid fa-robot text-lg"></i>
-                            </button>
-                            <button type="button" onclick="selectAvatar('fa-ghost')" class="avatar-opt p-3 rounded-xl border border-rose-900/40 bg-[#0a0508] hover:border-rose-500 text-rose-400 flex items-center justify-center transition-all" data-avatar="fa-ghost">
-                                <i class="fa-solid fa-ghost text-lg"></i>
-                            </button>
-                            <button type="button" onclick="selectAvatar('fa-dragon')" class="avatar-opt p-3 rounded-xl border border-rose-900/40 bg-[#0a0508] hover:border-rose-500 text-rose-400 flex items-center justify-center transition-all" data-avatar="fa-dragon">
-                                <i class="fa-solid fa-dragon text-lg"></i>
-                            </button>
-                            <button type="button" onclick="selectAvatar('fa-bolt')" class="avatar-opt p-3 rounded-xl border border-rose-900/40 bg-[#0a0508] hover:border-rose-500 text-rose-400 flex items-center justify-center transition-all" data-avatar="fa-bolt">
-                                <i class="fa-solid fa-bolt text-lg"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <button onclick="handleLogin()" class="w-full py-3.5 bg-gradient-to-r from-rose-700 to-rose-900 hover:from-rose-600 hover:to-rose-800 text-white font-bold rounded-xl shadow-lg shadow-rose-900/40 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center space-x-2">
-                        <span>Launch Platform</span>
-                        <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </button>
-
-                    <div class="relative flex py-2 items-center">
-                        <div class="flex-grow border-t border-rose-900/30"></div>
-                        <span class="flex-shrink mx-4 text-xs text-gray-500 uppercase tracking-widest">Or Firebase Auth</span>
-                        <div class="flex-grow border-t border-rose-900/30"></div>
-                    </div>
-
-                    <button onclick="handleFirebaseLogin()" class="w-full py-3 bg-[#0a0508] border border-rose-900/50 hover:border-rose-500 text-gray-300 hover:text-white font-medium rounded-xl transition-all flex items-center justify-center space-x-2 text-sm">
-                        <i class="fa-brands fa-google text-rose-500"></i>
-                        <span>Continue with Google (Firebase)</span>
-                    </button>
+                <div>
+                    <span class="font-display font-black text-2xl tracking-wider text-white">RYZER<span class="text-ryzer-crimson">'S.AI</span></span>
+                    <p class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">Luxury Cyber Arcade</p>
                 </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1 bg-ryzer-card/80 p-1.5 rounded-full border border-ryzer-crimson/15">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 text-white bg-ryzer-maroon/60 border border-ryzer-crimson/30">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4 inline mr-1.5"></i> Dashboard
+                </button>
+                <button onclick="switchTab('arcade')" id="nav-arcade" class="nav-btn px-5 py-2 rounded-full text-sm font-semibold text-gray-400 hover:text-white transition-all duration-300">
+                    <i data-lucide="gamepad-2" class="w-4 h-4 inline mr-1.5"></i> Arcade (4)
+                </button>
+                <button onclick="switchTab('roadmap')" id="nav-roadmap" class="nav-btn px-5 py-2 rounded-full text-sm font-semibold text-gray-400 hover:text-white transition-all duration-300">
+                    <i data-lucide="map" class="w-4 h-4 inline mr-1.5"></i> Roadmap
+                </button>
+                <button onclick="switchTab('profile')" id="nav-profile" class="nav-btn px-5 py-2 rounded-full text-sm font-semibold text-gray-400 hover:text-white transition-all duration-300">
+                    <i data-lucide="user" class="w-4 h-4 inline mr-1.5"></i> Profile
+                </button>
+            </nav>
+
+            <!-- User XP Pill & Controls -->
+            <div class="flex items-center gap-3">
                 
-                <p class="text-center text-xs text-gray-500 mt-6">Secure Instant Creator Mode Active • No password required</p>
+                <!-- XP Badge -->
+                <div class="hidden sm:flex items-center gap-2 bg-ryzer-card px-3.5 py-1.5 rounded-full border border-ryzer-crimson/30 shadow-inner">
+                    <div class="w-3 h-3 rounded-full bg-ryzer-crimson animate-ping"></div>
+                    <span class="text-xs font-display font-bold text-ryzer-crimson" id="nav-level-text">LVL 1</span>
+                    <span class="text-xs font-bold text-gray-300" id="nav-xp-text">0 XP</span>
+                </div>
+
+                <!-- Riz Tour Trigger -->
+                <button onclick="triggerRizTour()" class="p-2.5 rounded-xl bg-ryzer-maroon/40 border border-ryzer-crimson/30 text-ryzer-crimson hover:bg-ryzer-maroon transition-all" title="Ask Riz / Start Tour">
+                    <i data-lucide="bot" class="w-5 h-5"></i>
+                </button>
+
+                <!-- Auth Trigger / User Avatar -->
+                <div id="auth-header-container">
+                    <button onclick="openAuthModal()" class="maroon-gradient-btn text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-xl flex items-center gap-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i> Sign In
+                    </button>
+                </div>
             </div>
         </div>
+    </header>
 
-        <!-- MAIN APP SHELL -->
-        <div id="main-app" class="flex-1 flex flex-col hidden">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full relative z-10">
+        
+        <!-- ================= VIEW 1: DASHBOARD ================= -->
+        <section id="view-dashboard" class="view-content space-y-8">
             
-            <!-- Top Navbar -->
-            <header class="glass-panel sticky top-0 z-40 border-b border-rose-900/30 px-4 lg:px-8 py-3.5 flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-2.5 cursor-pointer" onclick="switchTab('dashboard')">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-900 to-rose-600 flex items-center justify-center text-white shadow-md shadow-rose-900/40">
-                            <i class="fa-solid fa-brain text-lg"></i>
-                        </div>
-                        <span class="text-xl font-extrabold tracking-tight text-white">Ryzer's<span class="text-rose-500">.ai</span></span>
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-3xl glass-panel p-8 sm:p-12 border border-ryzer-crimson/30">
+                <div class="absolute -right-20 -top-20 w-96 h-96 bg-ryzer-crimson/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-ryzer-maroon/40 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ryzer-maroon/50 border border-ryzer-crimson/40 text-xs font-semibold text-ryzer-crimson mb-4">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> AI-Powered Creator Playground v2.5
                     </div>
-                    <nav class="hidden md:flex items-center space-x-1 ml-6">
-                        <button onclick="switchTab('dashboard')" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-rose-950/40" data-tab="dashboard">Dashboard</button>
-                        <button onclick="switchTab('games')" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-rose-950/40" data-tab="games">Games Hub</button>
-                        <button onclick="switchTab('roadmap')" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-rose-950/40" data-tab="roadmap">Roadmap</button>
-                        <button onclick="switchTab('profile')" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-all text-gray-300 hover:text-white hover:bg-rose-950/40" data-tab="profile">Profile & Switch ID</button>
-                    </nav>
+                    <h1 class="font-display text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                        ENTER THE <span class="text-transparent bg-clip-text bg-gradient-to-r from-ryzer-crimson via-red-500 to-amber-500 neon-text-glow">CRIMSON ARCADE</span>
+                    </h1>
+                    <p class="text-gray-300 text-base sm:text-lg mb-6 leading-relaxed">
+                        Experience hyper-responsive AI gaming, puzzle vault cracking, speed tests, and memory matrix challenges. Gain XP, climb levels, and unlock creator privileges.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <button onclick="switchTab('arcade')" class="maroon-gradient-btn px-6 py-3 rounded-xl font-bold text-white flex items-center gap-2 shadow-lg shadow-ryzer-maroon/50">
+                            <i data-lucide="play" class="w-5 h-5"></i> Launch Games
+                        </button>
+                        <button onclick="openRizChat()" class="px-6 py-3 rounded-xl font-bold text-gray-200 bg-ryzer-card/80 border border-ryzer-crimson/30 hover:bg-ryzer-maroon/30 transition-all flex items-center gap-2">
+                            <i data-lucide="bot" class="w-5 h-5 text-ryzer-crimson"></i> Talk with Riz AI
+                        </button>
+                    </div>
                 </div>
-
-                <div class="flex items-center space-x-4">
-                    <!-- XP & Level Badge -->
-                    <div class="hidden sm:flex items-center space-x-3 bg-rose-950/40 border border-rose-900/40 px-3.5 py-1.5 rounded-xl">
-                        <div class="flex flex-col text-right">
-                            <span class="text-[10px] uppercase tracking-wider text-rose-400 font-bold" id="nav-level-title">Level 1 Creator</span>
-                            <span class="text-xs font-bold text-white"><span id="nav-xp">0</span> / 100 XP</span>
-                        </div>
-                        <div class="w-8 h-8 rounded-lg bg-rose-900/60 flex items-center justify-center text-rose-300">
-                            <i class="fa-solid fa-star text-xs"></i>
-                        </div>
-                    </div>
-
-                    <!-- Riz Tour Trigger Button -->
-                    <button onclick="startRizTour()" class="px-3.5 py-2 rounded-xl bg-rose-900/40 border border-rose-700/50 hover:bg-rose-800/50 text-rose-200 text-xs font-bold transition-all flex items-center space-x-2 shadow-sm">
-                        <i class="fa-solid fa-robot text-rose-400 animate-bounce"></i>
-                        <span class="hidden sm:inline">Ask Riz Tour</span>
-                    </button>
-
-                    <!-- User Profile Dropdown / Trigger -->
-                    <div onclick="switchTab('profile')" class="flex items-center space-x-2.5 cursor-pointer p-1.5 rounded-xl hover:bg-rose-950/50 transition-all border border-transparent hover:border-rose-900/40">
-                        <div id="nav-user-avatar" class="w-9 h-9 rounded-xl bg-rose-900/60 border border-rose-700/50 flex items-center justify-center text-white text-sm">
-                            <i class="fa-solid fa-robot"></i>
-                        </div>
-                        <span id="nav-username" class="text-sm font-bold text-white hidden md:inline">Creator</span>
-                    </div>
-
-                    <!-- Mobile Menu Toggle -->
-                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl bg-rose-950/50 text-rose-300 hover:text-white">
-                        <i class="fa-solid fa-bars text-lg"></i>
-                    </button>
-                </div>
-            </header>
-
-            <!-- Mobile Drawer -->
-            <div id="mobile-menu" class="md:hidden hidden glass-panel border-b border-rose-900/40 px-6 py-4 space-y-3 z-30">
-                <button onclick="switchTab('dashboard'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-gray-200 hover:bg-rose-950/50">Dashboard</button>
-                <button onclick="switchTab('games'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-gray-200 hover:bg-rose-950/50">Games Hub</button>
-                <button onclick="switchTab('roadmap'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-gray-200 hover:bg-rose-950/50">Roadmap</button>
-                <button onclick="switchTab('profile'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-gray-200 hover:bg-rose-950/50">Profile & Switch ID</button>
             </div>
 
-            <!-- RIZ AI ASSISTANT POP-UP CHARACTER GUIDED TOUR MODAL -->
-            <div id="riz-tour-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 hidden">
-                <div class="glass-panel w-full max-w-lg rounded-3xl p-6 sm:p-8 border border-rose-500/40 shadow-2xl relative animate-glow">
-                    <!-- Close / Skip Button -->
-                    <button onclick="closeRizTour()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-sm p-2 rounded-xl hover:bg-rose-950/50 transition-all">
-                        <i class="fa-solid fa-xmark text-lg"></i>
-                    </button>
-
-                    <div class="flex items-start space-x-4 mb-6">
-                        <!-- Cute Animated Robot Avatar -->
-                        <div class="relative flex-shrink-0">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-rose-900 to-rose-600 flex items-center justify-center text-white shadow-lg shadow-rose-900/60 animate-float">
-                                <i class="fa-solid fa-robot text-3xl robot-eye"></i>
-                            </div>
-                            <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-[#070308] flex items-center justify-center text-[10px] text-white">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex items-center space-x-2">
-                                <h3 class="text-lg font-bold text-white">Riz AI Assistant</h3>
-                                <span class="px-2 py-0.5 rounded-full bg-rose-900/60 text-rose-300 text-[10px] font-bold uppercase tracking-wider">Guide Mode</span>
-                            </div>
-                            <p class="text-xs text-gray-400 mt-0.5">Your personal platform navigator</p>
-                        </div>
-                    </div>
-
-                    <!-- Tour Dialogue Box -->
-                    <div class="bg-[#0a0508]/80 border border-rose-900/40 rounded-2xl p-5 mb-6">
-                        <h4 id="tour-step-title" class="text-base font-bold text-rose-300 mb-2">Welcome to Ryzer's.ai!</h4>
-                        <p id="tour-step-desc" class="text-sm text-gray-300 leading-relaxed">
-                            Hello Creator! I'm Riz, your AI assistant. Let me take you on a quick tour of our sleek platform featuring 4 amazing games, XP rewards, and community roadmaps!
-                        </p>
-                    </div>
-
-                    <!-- Tour Progress Dots & Controls -->
+            <!-- Dashboard Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-panel p-5 rounded-2xl border border-ryzer-crimson/20">
                     <div class="flex items-center justify-between">
-                        <div class="flex space-x-1.5" id="tour-dots">
-                            <!-- Generated via JS -->
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <button onclick="prevTourStep()" id="tour-prev-btn" class="px-4 py-2 rounded-xl bg-rose-950/60 border border-rose-900/40 text-gray-300 hover:text-white text-xs font-semibold transition-all">
-                                Prev
-                            </button>
-                            <button onclick="nextTourStep()" id="tour-next-btn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-rose-700 to-rose-900 hover:from-rose-600 hover:to-rose-800 text-white text-xs font-bold transition-all shadow-md shadow-rose-900/40">
-                                Next Step
-                            </button>
-                        </div>
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Total XP Earned</span>
+                        <i data-lucide="zap" class="w-5 h-5 text-ryzer-crimson"></i>
                     </div>
+                    <p class="font-display text-2xl font-black text-white mt-2" id="stat-total-xp">0 XP</p>
+                    <div class="w-full bg-gray-800 h-1.5 rounded-full mt-3 overflow-hidden">
+                        <div id="stat-xp-bar" class="bg-gradient-to-r from-ryzer-maroon to-ryzer-crimson h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl border border-ryzer-crimson/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Creator Rank</span>
+                        <i data-lucide="shield-check" class="w-5 h-5 text-ryzer-crimson"></i>
+                    </div>
+                    <p class="font-display text-2xl font-black text-white mt-2" id="stat-rank-title">Novice Creator</p>
+                    <p class="text-xs text-gray-400 mt-1">Level <span id="stat-level-num">1</span> Unlocked</p>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl border border-ryzer-crimson/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Reflex Peak CPS</span>
+                        <i data-lucide="activity" class="w-5 h-5 text-ryzer-crimson"></i>
+                    </div>
+                    <p class="font-display text-2xl font-black text-white mt-2" id="stat-peak-cps">0.0 CPS</p>
+                    <p class="text-xs text-gray-400 mt-1">Speed Tap Record</p>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl border border-ryzer-crimson/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Vaults Cracked</span>
+                        <i data-lucide="lock" class="w-5 h-5 text-ryzer-crimson"></i>
+                    </div>
+                    <p class="font-display text-2xl font-black text-white mt-2" id="stat-vaults-cleared">0</p>
+                    <p class="text-xs text-gray-400 mt-1">Cipher Solves</p>
                 </div>
             </div>
 
-            <!-- MAIN CONTENT AREA -->
-            <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
+            <!-- Arcade Quick Launchers -->
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-display text-2xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="gamepad-2" class="w-6 h-6 text-ryzer-crimson"></i> Featured Cyber Games
+                    </h2>
+                    <button onclick="switchTab('arcade')" class="text-xs text-ryzer-crimson font-bold hover:underline flex items-center gap-1">
+                        View All <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
 
-                <!-- TAB 1: DASHBOARD -->
-                <section id="tab-dashboard" class="tab-content space-y-6">
-                    <!-- Welcome Banner -->
-                    <div class="glass-panel p-6 sm:p-8 rounded-3xl relative overflow-hidden border border-rose-900/40">
-                        <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-rose-900/10 rounded-full blur-3xl pointer-events-none"></div>
-                        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                            <div>
-                                <span class="px-3 py-1 rounded-full bg-rose-950 border border-rose-800/50 text-rose-400 text-xs font-bold uppercase tracking-wider">Welcome back</span>
-                                <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2">Hello, <span id="dash-username" class="text-rose-500">Creator</span>!</h2>
-                                <p class="text-sm text-gray-400 mt-2 max-w-xl">Ready to test your wits across our 4 signature cognition & gaming challenges? Climb the XP leaderboards and unlock exclusive badges!</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Game Card 1 -->
+                    <div onclick="launchGame('guess')" class="glass-panel p-6 rounded-2xl glass-panel-hover cursor-pointer transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-ryzer-maroon/50 border border-ryzer-crimson/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="help-circle" class="w-6 h-6 text-ryzer-crimson"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-2">Guess & Play AI</h3>
+                        <p class="text-xs text-gray-400 mb-4 line-clamp-2">Dual-mode guessing game. Outsmart the AI or let Riz decipher your secret number!</p>
+                        <span class="text-xs font-bold text-ryzer-crimson group-hover:translate-x-1 inline-flex items-center gap-1 transition-transform">Play Mode <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+
+                    <!-- Game Card 2 -->
+                    <div onclick="launchGame('cipher')" class="glass-panel p-6 rounded-2xl glass-panel-hover cursor-pointer transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-ryzer-maroon/50 border border-ryzer-crimson/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="key-round" class="w-6 h-6 text-ryzer-crimson"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-2">Cipher Vault</h3>
+                        <p class="text-xs text-gray-400 mb-4 line-clamp-2">Crack the 3-digit combination vault with thermal proximity hints before attempts expire.</p>
+                        <span class="text-xs font-bold text-ryzer-crimson group-hover:translate-x-1 inline-flex items-center gap-1 transition-transform">Crack Vault <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+
+                    <!-- Game Card 3 -->
+                    <div onclick="launchGame('reflex')" class="glass-panel p-6 rounded-2xl glass-panel-hover cursor-pointer transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-ryzer-maroon/50 border border-ryzer-crimson/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="zap" class="w-6 h-6 text-ryzer-crimson"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-2">Reflex Tap</h3>
+                        <p class="text-xs text-gray-400 mb-4 line-clamp-2">10-second rapid click reaction test with real-time APM meter and high score bonus.</p>
+                        <span class="text-xs font-bold text-ryzer-crimson group-hover:translate-x-1 inline-flex items-center gap-1 transition-transform">Test Speed <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+
+                    <!-- Game Card 4 -->
+                    <div onclick="launchGame('matrix')" class="glass-panel p-6 rounded-2xl glass-panel-hover cursor-pointer transition-all duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-ryzer-maroon/50 border border-ryzer-crimson/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="grid" class="w-6 h-6 text-ryzer-crimson"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white mb-2">Memory Matrix</h3>
+                        <p class="text-xs text-gray-400 mb-4 line-clamp-2">Replicate glowing 3x3 pattern sequences with increasing complexity and precision.</p>
+                        <span class="text-xs font-bold text-ryzer-crimson group-hover:translate-x-1 inline-flex items-center gap-1 transition-transform">Test Memory <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VIEW 2: ARCADE HUB & GAMES ================= -->
+        <section id="view-arcade" class="view-content hidden space-y-6">
+            
+            <!-- Game Selector Header Tabs -->
+            <div class="flex flex-wrap items-center gap-2 bg-ryzer-card/90 p-2 rounded-2xl border border-ryzer-crimson/20">
+                <button onclick="launchGame('guess')" id="game-tab-guess" class="game-select-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-ryzer-maroon text-white border border-ryzer-crimson/40">
+                    <i data-lucide="help-circle" class="w-4 h-4"></i> Guess & Play AI
+                </button>
+                <button onclick="launchGame('cipher')" id="game-tab-cipher" class="game-select-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-gray-400 hover:text-white flex items-center gap-2">
+                    <i data-lucide="key-round" class="w-4 h-4"></i> Cipher Vault
+                </button>
+                <button onclick="launchGame('reflex')" id="game-tab-reflex" class="game-select-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-gray-400 hover:text-white flex items-center gap-2">
+                    <i data-lucide="zap" class="w-4 h-4"></i> Reflex Tap
+                </button>
+                <button onclick="launchGame('matrix')" id="game-tab-matrix" class="game-select-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-gray-400 hover:text-white flex items-center gap-2">
+                    <i data-lucide="grid" class="w-4 h-4"></i> Memory Matrix
+                </button>
+            </div>
+
+            <!-- GAME 1 CONTAINER: GUESS & PLAY AI -->
+            <div id="game-container-guess" class="game-stage glass-panel p-6 sm:p-8 rounded-3xl border border-ryzer-crimson/30">
+                <div class="max-w-2xl mx-auto text-center space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ryzer-maroon/40 text-xs font-bold text-ryzer-crimson border border-ryzer-crimson/30">
+                        <i data-lucide="bot" class="w-4 h-4"></i> AI-Powered Dual Guesser
+                    </div>
+                    <h2 class="font-display text-3xl font-black text-white">GUESS & PLAY WITH RIZ</h2>
+                    
+                    <!-- Mode Switcher -->
+                    <div class="flex justify-center gap-3">
+                        <button onclick="setGuessMode('user-guesses')" id="guess-mode-1-btn" class="px-4 py-2 rounded-xl text-xs font-bold bg-ryzer-crimson text-white border border-ryzer-crimson">
+                            Mode 1: You Guess AI Number
+                        </button>
+                        <button onclick="setGuessMode('ai-guesses')" id="guess-mode-2-btn" class="px-4 py-2 rounded-xl text-xs font-bold bg-ryzer-card text-gray-400 hover:text-white border border-ryzer-crimson/20">
+                            Mode 2: AI Guesses Your Secret
+                        </button>
+                    </div>
+
+                    <!-- Mode 1 Body -->
+                    <div id="guess-mode-1-box" class="space-y-4 pt-4">
+                        <p class="text-sm text-gray-300">Riz has chosen a secret integer between <span class="text-ryzer-crimson font-bold">1 and 100</span>. Submit your guess!</p>
+                        
+                        <div class="flex justify-center gap-2 max-w-xs mx-auto">
+                            <input type="number" id="user-guess-input" min="1" max="100" placeholder="e.g. 42" class="w-full bg-ryzer-dark border border-ryzer-crimson/30 rounded-xl px-4 py-3 text-white font-bold text-center focus:outline-none focus:border-ryzer-crimson">
+                            <button onclick="submitUserGuess()" class="maroon-gradient-btn px-6 py-3 rounded-xl font-bold text-white shrink-0">Submit</button>
+                        </div>
+
+                        <div id="guess-mode-1-feedback" class="min-h-[60px] flex items-center justify-center text-sm font-semibold text-gray-300 bg-ryzer-dark/50 rounded-xl p-3 border border-ryzer-crimson/10">
+                            Awaiting your first guess...
+                        </div>
+                    </div>
+
+                    <!-- Mode 2 Body -->
+                    <div id="guess-mode-2-box" class="space-y-4 pt-4 hidden">
+                        <p class="text-sm text-gray-300">Think of a secret number between <span class="text-ryzer-crimson font-bold">1 and 100</span> in your head, then click Start!</p>
+                        
+                        <div id="ai-guess-start-view">
+                            <button onclick="startAiGuessingGame()" class="maroon-gradient-btn px-8 py-3 rounded-xl font-bold text-white shadow-lg">I Have My Secret Number!</button>
+                        </div>
+
+                        <div id="ai-guess-active-view" class="hidden space-y-4">
+                            <div class="text-lg font-bold text-white bg-ryzer-dark p-4 rounded-xl border border-ryzer-crimson/30" id="ai-guess-prompt-text">
+                                Is your number 50?
                             </div>
-                            <div class="flex items-center space-x-3">
-                                <button onclick="switchTab('games')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-rose-700 to-rose-900 hover:from-rose-600 hover:to-rose-800 text-white font-bold text-sm shadow-lg shadow-rose-900/40 transition-all flex items-center space-x-2">
-                                    <i class="fa-solid fa-gamepad"></i>
-                                    <span>Play Games Now</span>
+                            <div class="flex justify-center gap-3">
+                                <button onclick="respondAiGuess('lower')" class="px-5 py-2.5 rounded-xl bg-blue-600/30 text-blue-300 border border-blue-500/30 hover:bg-blue-600/50 font-bold text-xs">
+                                    Lower ❄️
+                                </button>
+                                <button onclick="respondAiGuess('correct')" class="px-5 py-2.5 rounded-xl maroon-gradient-btn text-white font-bold text-xs">
+                                    Yes! Exact Match 🎉
+                                </button>
+                                <button onclick="respondAiGuess('higher')" class="px-5 py-2.5 rounded-xl bg-red-600/30 text-red-300 border border-red-500/30 hover:bg-red-600/50 font-bold text-xs">
+                                    Higher 🔥
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Quick Stats Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div class="glass-panel p-5 rounded-2xl border border-rose-900/30">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Total XP</span>
-                                <div class="w-10 h-10 rounded-xl bg-rose-950 border border-rose-800/40 flex items-center justify-center text-rose-400">
-                                    <i class="fa-solid fa-bolt"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-2xl font-extrabold text-white" id="stat-xp">0</h3>
-                            <p class="text-xs text-rose-400 mt-1 font-medium"><span id="stat-level">Level 1</span> Creator</p>
+            <!-- GAME 2 CONTAINER: CIPHER VAULT -->
+            <div id="game-container-cipher" class="game-stage glass-panel p-6 sm:p-8 rounded-3xl border border-ryzer-crimson/30 hidden">
+                <div class="max-w-xl mx-auto text-center space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ryzer-maroon/40 text-xs font-bold text-ryzer-crimson border border-ryzer-crimson/30">
+                        <i data-lucide="lock" class="w-4 h-4"></i> Security Clearance Puzzle
+                    </div>
+                    <h2 class="font-display text-3xl font-black text-white">CIPHER VAULT CRACKER</h2>
+                    <p class="text-sm text-gray-300">Decrypt the 3-digit combination code before attempts run out!</p>
+
+                    <!-- Vault Display Wheels -->
+                    <div class="flex justify-center items-center gap-4 py-4">
+                        <div class="w-20 h-24 bg-ryzer-dark rounded-2xl border-2 border-ryzer-crimson/50 flex flex-col items-center justify-between p-2 shadow-inner">
+                            <button onclick="changeDigit(0, 1)" class="text-ryzer-crimson hover:scale-125 transition-transform"><i data-lucide="chevron-up"></i></button>
+                            <span id="digit-0" class="font-display text-4xl font-black text-white">0</span>
+                            <button onclick="changeDigit(0, -1)" class="text-ryzer-crimson hover:scale-125 transition-transform"><i data-lucide="chevron-down"></i></button>
                         </div>
-                        <div class="glass-panel p-5 rounded-2xl border border-rose-900/30">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Games Played</span>
-                                <div class="w-10 h-10 rounded-xl bg-rose-950 border border-rose-800/40 flex items-center justify-center text-rose-400">
-                                    <i class="fa-solid fa-dice"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-2xl font-extrabold text-white" id="stat-games-played">0</h3>
-                            <p class="text-xs text-gray-400 mt-1">Across 4 unique arenas</p>
+                        <div class="w-20 h-24 bg-ryzer-dark rounded-2xl border-2 border-ryzer-crimson/50 flex flex-col items-center justify-between p-2 shadow-inner">
+                            <button onclick="changeDigit(1, 1)" class="text-ryzer-crimson hover:scale-125 transition-transform"><i data-lucide="chevron-up"></i></button>
+                            <span id="digit-1" class="font-display text-4xl font-black text-white">0</span>
+                            <button onclick="changeDigit(1, -1)" class="text-ryzer-crimson hover:scale-125 transition-transform"><i data-lucide="chevron-down"></i></button>
                         </div>
-                        <div class="glass-panel p-5 rounded-2xl border border-rose-900/30">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Badges Unlocked</span>
-                                <div class="w-10 h-10 rounded-xl bg-rose-950 border border-rose-800/40 flex items-center justify-center text-rose-400">
-                                    <i class="fa-solid fa-medal"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-2xl font-extrabold text-white" id="stat-badges">1 / 6</h3>
-                            <p class="text-xs text-gray-400 mt-1">Riz Novice badge active</p>
-                        </div>
-                        <div class="glass-panel p-5 rounded-2xl border border-rose-900/30">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-bold uppercase tracking-wider text-gray-400">AI Assistant</span>
-                                <div class="w-10 h-10 rounded-xl bg-rose-950 border border-rose-800/40 flex items-center justify-center text-rose-400">
-                                    <i class="fa-solid fa-robot"></i>
-                                </div>
-                            </div>
-                            <h3 class="text-2xl font-extrabold text-white">Online</h3>
-                            <p class="text-xs text-emerald-400 mt-1 font-medium">Riz AI ready for tour</p>
+                        <div class="w-20 h-24 bg-ryzer-dark rounded-2xl border-2 border-ryzer-crimson/50 flex flex-col items-center justify-between p-2 shadow-inner">
+                            <button onclick="changeDigit(2, 1)" class="text-ryzer-crimson hover:scale-125 transition-transform"><i data-lucide="chevron-up"></i></button>
+                            <span id="digit-2" class="font-display text-4xl font-black text-white">0</span>
+                            <button onclick="changeDigit(2, -1)" class="text-ryzer-crimson hover:scale-125 transition-transform"><i data-lucide="chevron-down"></i></button>
                         </div>
                     </div>
 
-                    <!-- Games Quick Launch Carousel -->
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-bold text-white flex items-center space-x-2">
-                                <i class="fa-solid fa-gamepad text-rose-500"></i>
-                                <span>Featured Game Arenas</span>
-                            </h3>
-                            <button onclick="switchTab('games')" class="text-xs font-bold text-rose-400 hover:text-rose-300">View All Games →</button>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <!-- Game 1 Card -->
-                            <div onclick="openGame('guess-play')" class="glass-panel glass-panel-hover p-5 rounded-2xl cursor-pointer transition-all flex flex-col justify-between border border-rose-900/30 group">
-                                <div>
-                                    <div class="w-12 h-12 rounded-xl bg-rose-950 border border-rose-800/50 flex items-center justify-center text-rose-400 text-lg mb-4 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-question"></i>
-                                    </div>
-                                    <h4 class="text-base font-bold text-white">Guess & Play</h4>
-                                    <p class="text-xs text-gray-400 mt-1">Dual mode: Guess AI's figure or let AI guess yours with Yes/No prompts!</p>
-                                </div>
-                                <div class="mt-6 flex items-center justify-between text-xs font-semibold text-rose-400">
-                                    <span>Play Arena</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                            <!-- Game 2 Card -->
-                            <div onclick="openGame('cipher-vault')" class="glass-panel glass-panel-hover p-5 rounded-2xl cursor-pointer transition-all flex flex-col justify-between border border-rose-900/30 group">
-                                <div>
-                                    <div class="w-12 h-12 rounded-xl bg-rose-950 border border-rose-800/50 flex items-center justify-center text-rose-400 text-lg mb-4 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-vault"></i>
-                                    </div>
-                                    <h4 class="text-base font-bold text-white">Cipher Vault</h4>
-                                    <p class="text-xs text-gray-400 mt-1">Crack the secret 3-digit security vault code using hot & cold telemetry hints.</p>
-                                </div>
-                                <div class="mt-6 flex items-center justify-between text-xs font-semibold text-rose-400">
-                                    <span>Play Arena</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                            <!-- Game 3 Card -->
-                            <div onclick="openGame('reflex-tap')" class="glass-panel glass-panel-hover p-5 rounded-2xl cursor-pointer transition-all flex flex-col justify-between border border-rose-900/30 group">
-                                <div>
-                                    <div class="w-12 h-12 rounded-xl bg-rose-950 border border-rose-800/50 flex items-center justify-center text-rose-400 text-lg mb-4 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-gauge-high"></i>
-                                    </div>
-                                    <h4 class="text-base font-bold text-white">Reflex Tap</h4>
-                                    <p class="text-xs text-gray-400 mt-1">10-second rapid click speed challenge. Push your APM and finger speed to limits!</p>
-                                </div>
-                                <div class="mt-6 flex items-center justify-between text-xs font-semibold text-rose-400">
-                                    <span>Play Arena</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                            <!-- Game 4 Card -->
-                            <div onclick="openGame('memory-matrix')" class="glass-panel glass-panel-hover p-5 rounded-2xl cursor-pointer transition-all flex flex-col justify-between border border-rose-900/30 group">
-                                <div>
-                                    <div class="w-12 h-12 rounded-xl bg-rose-950 border border-rose-800/50 flex items-center justify-center text-rose-400 text-lg mb-4 group-hover:scale-110 transition-transform">
-                                        <i class="fa-solid fa-chess-board"></i>
-                                    </div>
-                                    <h4 class="text-base font-bold text-white">Memory Matrix</h4>
-                                    <p class="text-xs text-gray-400 mt-1">Memorize the glowing grid sequence and repeat it accurately to level up.</p>
-                                </div>
-                                <div class="mt-6 flex items-center justify-between text-xs font-semibold text-rose-400">
-                                    <span>Play Arena</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- TAB 2: GAMES HUB -->
-                <section id="tab-games" class="tab-content space-y-6 hidden">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div>
-                            <h2 class="text-2xl font-extrabold text-white">Games Hub</h2>
-                            <p class="text-xs text-gray-400 mt-1">Choose a game arena to earn XP, level up, and unlock creator achievements.</p>
-                        </div>
-                        <div class="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0">
-                            <button onclick="openGame('guess-play')" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-rose-900 text-white transition-all whitespace-nowrap" data-game="guess-play">Guess & Play</button>
-                            <button onclick="openGame('cipher-vault')" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-[#120712] text-gray-300 hover:text-white border border-rose-900/40 transition-all whitespace-nowrap" data-game="cipher-vault">Cipher Vault</button>
-                            <button onclick="openGame('reflex-tap')" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-[#120712] text-gray-300 hover:text-white border border-rose-900/40 transition-all whitespace-nowrap" data-game="reflex-tap">Reflex Tap</button>
-                            <button onclick="openGame('memory-matrix')" class="game-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-[#120712] text-gray-300 hover:text-white border border-rose-900/40 transition-all whitespace-nowrap" data-game="memory-matrix">Memory Matrix</button>
-                        </div>
+                    <div class="flex justify-between items-center bg-ryzer-dark p-3 rounded-xl border border-ryzer-crimson/20 text-xs">
+                        <span class="text-gray-400">Attempts Left: <strong id="vault-attempts" class="text-white text-sm">7</strong></span>
+                        <span id="vault-thermal-status" class="text-gray-400">Proximity: <strong class="text-yellow-400">Neutral</strong></span>
                     </div>
 
-                    <!-- GAME 1: GUESS & PLAY -->
-                    <div id="game-guess-play" class="game-container glass-panel p-6 sm:p-8 rounded-3xl border border-rose-900/40">
-                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 pb-6 border-b border-rose-900/30">
-                            <div>
-                                <span class="px-3 py-1 rounded-full bg-rose-950 text-rose-400 text-[10px] font-bold uppercase tracking-wider">Dual Mode AI Game</span>
-                                <h3 class="text-xl font-extrabold text-white mt-1">Guess & Play with Ryzer's AI</h3>
-                                <p class="text-xs text-gray-400 mt-1">Test your deduction skills against Riz AI or let Riz guess your figure!</p>
-                            </div>
-                            <div class="flex bg-[#0a0508] p-1 rounded-xl border border-rose-900/40">
-                                <button onclick="setGuessMode('user-guess')" id="mode-btn-user" class="px-4 py-2 rounded-lg text-xs font-bold bg-rose-900 text-white transition-all">You Guess AI</button>
-                                <button onclick="setGuessMode('ai-guess')" id="mode-btn-ai" class="px-4 py-2 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all">AI Guesses You</button>
-                            </div>
-                        </div>
-
-                        <!-- Mode A: User Guesses AI -->
-                        <div id="submode-user-guess" class="space-y-6">
-                            <div class="bg-[#0a0508]/80 p-5 rounded-2xl border border-rose-900/40 flex items-center justify-between">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-xl bg-rose-950 flex items-center justify-center text-rose-400">
-                                        <i class="fa-solid fa-robot"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-sm font-bold text-white">Riz AI has chosen a hidden figure/concept!</h4>
-                                        <p class="text-xs text-gray-400" id="user-guess-status">Ask Yes/No questions to deduce what it is. Attempts left: <span id="user-attempts" class="text-rose-400 font-bold">10</span></p>
-                                    </div>
-                                </div>
-                                <button onclick="resetUserGuessGame()" class="px-3 py-1.5 rounded-xl bg-rose-950/60 border border-rose-900/40 text-rose-300 text-xs font-semibold hover:bg-rose-900/40">Reset</button>
-                            </div>
-
-                            <div class="flex gap-2">
-                                <input type="text" id="user-question-input" placeholder="e.g. Is it a living creature? Is it technology?" 
-                                    class="flex-1 bg-[#0a0508] border border-rose-900/40 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-rose-500">
-                                <button onclick="askUserQuestion()" class="px-6 py-3 bg-gradient-to-r from-rose-700 to-rose-900 text-white font-bold rounded-xl text-sm shadow-md hover:from-rose-600 transition-all">Ask AI</button>
-                            </div>
-
-                            <div id="user-chat-log" class="space-y-3 max-h-72 overflow-y-auto pr-2">
-                                <div class="p-3.5 rounded-2xl bg-rose-950/30 border border-rose-900/30 text-xs text-gray-300 flex items-start space-x-3">
-                                    <i class="fa-solid fa-robot text-rose-500 mt-0.5"></i>
-                                    <div>
-                                        <span class="font-bold text-white block mb-0.5">Riz AI</span>
-                                        I have my secret concept locked in. Ask me your first Yes/No question!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Mode B: AI Guesses User -->
-                        <div id="submode-ai-guess" class="space-y-6 hidden">
-                            <div class="bg-[#0a0508]/80 p-5 rounded-2xl border border-rose-900/40 text-center">
-                                <div class="w-12 h-12 rounded-2xl bg-rose-950 flex items-center justify-center text-rose-400 mx-auto mb-3">
-                                    <i class="fa-solid fa-brain"></i>
-                                </div>
-                                <h4 class="text-base font-bold text-white">Think of an object, animal, or character in your mind!</h4>
-                                <p class="text-xs text-gray-400 mt-1">Riz AI will ask you questions. Answer truthfully and let Riz guess your thought.</p>
-                                <button onclick="startAIGuessSession()" id="ai-guess-start-btn" class="mt-4 px-6 py-2.5 bg-gradient-to-r from-rose-700 to-rose-900 text-white font-bold rounded-xl text-xs shadow-md">I'm Ready, Start Guessing</button>
-                            </div>
-
-                            <div id="ai-guess-arena" class="space-y-4 hidden">
-                                <div class="p-5 rounded-2xl bg-rose-950/40 border border-rose-900/50 text-center space-y-2">
-                                    <span class="text-xs font-bold text-rose-400 uppercase tracking-widest" id="ai-question-counter">Question 1</span>
-                                    <h3 id="ai-current-question" class="text-lg font-bold text-white">Is your object electronic or digital?</h3>
-                                </div>
-                                <div class="grid grid-cols-3 gap-3">
-                                    <button onclick="answerAIGuess('yes')" class="py-3 bg-emerald-950/60 border border-emerald-800/40 hover:border-emerald-500 text-emerald-300 font-bold rounded-xl text-sm transition-all">Yes</button>
-                                    <button onclick="answerAIGuess('no')" class="py-3 bg-rose-950/60 border border-rose-800/40 hover:border-rose-500 text-rose-300 font-bold rounded-xl text-sm transition-all">No</button>
-                                    <button onclick="answerAIGuess('maybe')" class="py-3 bg-amber-950/60 border border-amber-800/40 hover:border-amber-500 text-amber-300 font-bold rounded-xl text-sm transition-all">Maybe / Partly</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GAME 2: CIPHER VAULT -->
-                    <div id="game-cipher-vault" class="game-container glass-panel p-6 sm:p-8 rounded-3xl border border-rose-900/40 hidden">
-                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 pb-6 border-b border-rose-900/30">
-                            <div>
-                                <span class="px-3 py-1 rounded-full bg-rose-950 text-rose-400 text-[10px] font-bold uppercase tracking-wider">Security Puzzle</span>
-                                <h3 class="text-xl font-extrabold text-white mt-1">Cipher Vault Code Cracker</h3>
-                                <p class="text-xs text-gray-400 mt-1">Crack the secret 3-digit combination using hot & cold clues before attempts run out.</p>
-                            </div>
-                            <button onclick="resetCipherVault()" class="px-4 py-2 rounded-xl bg-rose-950/60 border border-rose-900/40 text-rose-300 text-xs font-semibold">New Code</button>
-                        </div>
-
-                        <div class="max-w-md mx-auto space-y-6 text-center">
-                            <div class="flex justify-center space-x-3">
-                                <div class="w-16 h-20 rounded-2xl bg-[#0a0508] border-2 border-rose-900/50 flex items-center justify-center text-3xl font-extrabold text-white shadow-inner" id="vault-digit-0">?</div>
-                                <div class="w-16 h-20 rounded-2xl bg-[#0a0508] border-2 border-rose-900/50 flex items-center justify-center text-3xl font-extrabold text-white shadow-inner" id="vault-digit-1">?</div>
-                                <div class="w-16 h-20 rounded-2xl bg-[#0a0508] border-2 border-rose-900/50 flex items-center justify-center text-3xl font-extrabold text-white shadow-inner" id="vault-digit-2">?</div>
-                            </div>
-
-                            <div class="flex gap-2">
-                                <input type="number" id="vault-input" min="000" max="999" placeholder="Enter 3 digits (e.g. 482)" 
-                                    class="flex-1 bg-[#0a0508] border border-rose-900/40 rounded-xl px-4 py-3 text-center text-lg font-bold text-white placeholder-gray-600 focus:outline-none focus:border-rose-500">
-                                <button onclick="submitVaultCode()" class="px-6 py-3 bg-gradient-to-r from-rose-700 to-rose-900 text-white font-bold rounded-xl text-sm shadow-md">Unlock</button>
-                            </div>
-
-                            <div id="vault-feedback" class="p-4 rounded-2xl bg-rose-950/30 border border-rose-900/30 text-xs text-gray-300 font-medium">
-                                Status: Enter any 3-digit combination to receive telemetry hints. Attempts remaining: <span id="vault-attempts" class="text-rose-400 font-bold">7</span>
-                            </div>
-
-                            <div id="vault-history" class="space-y-2 max-h-40 overflow-y-auto text-left text-xs">
-                                <!-- History items populated here -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GAME 3: REFLEX TAP -->
-                    <div id="game-reflex-tap" class="game-container glass-panel p-6 sm:p-8 rounded-3xl border border-rose-900/40 hidden">
-                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 pb-6 border-b border-rose-900/30">
-                            <div>
-                                <span class="px-3 py-1 rounded-full bg-rose-950 text-rose-400 text-[10px] font-bold uppercase tracking-wider">Speed Challenge</span>
-                                <h3 class="text-xl font-extrabold text-white mt-1">10-Second Reflex Tap</h3>
-                                <p class="text-xs text-gray-400 mt-1">Tap the target as many times as possible within 10 seconds to set a new APM record!</p>
-                            </div>
-                            <div class="flex items-center space-x-4">
-                                <div class="text-right">
-                                    <span class="text-[10px] uppercase text-gray-400 block font-bold">Best Score</span>
-                                    <span id="reflex-best" class="text-lg font-extrabold text-rose-400">0 Taps</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="max-w-md mx-auto text-center space-y-6">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-[#0a0508] p-4 rounded-2xl border border-rose-900/40">
-                                    <span class="text-xs text-gray-400 block uppercase font-bold">Time Left</span>
-                                    <span id="reflex-timer" class="text-2xl font-extrabold text-white">10.0s</span>
-                                </div>
-                                <div class="bg-[#0a0508] p-4 rounded-2xl border border-rose-900/40">
-                                    <span class="text-xs text-gray-400 block uppercase font-bold">Current Taps</span>
-                                    <span id="reflex-score" class="text-2xl font-extrabold text-rose-500">0</span>
-                                </div>
-                            </div>
-
-                            <button id="reflex-target-btn" onclick="tapReflexButton()" disabled class="w-full py-16 bg-gradient-to-tr from-rose-950 to-[#120712] border-2 border-rose-900/50 hover:border-rose-500 rounded-3xl text-white font-extrabold text-xl shadow-xl transition-all flex flex-col items-center justify-center space-y-2 cursor-not-allowed opacity-80">
-                                <i class="fa-solid fa-fingerprint text-3xl text-rose-500 animate-pulse"></i>
-                                <span id="reflex-btn-text">Click Start Challenge Below</span>
-                            </button>
-
-                            <button onclick="startReflexGame()" id="reflex-start-btn" class="w-full py-3.5 bg-gradient-to-r from-rose-700 to-rose-900 hover:from-rose-600 text-white font-bold rounded-xl text-sm shadow-md">
-                                Start 10s Speed Test
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- GAME 4: MEMORY MATRIX -->
-                    <div id="game-memory-matrix" class="game-container glass-panel p-6 sm:p-8 rounded-3xl border border-rose-900/40 hidden">
-                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 pb-6 border-b border-rose-900/30">
-                            <div>
-                                <span class="px-3 py-1 rounded-full bg-rose-950 text-rose-400 text-[10px] font-bold uppercase tracking-wider">Cognition Test</span>
-                                <h3 class="text-xl font-extrabold text-white mt-1">Memory Matrix Sequence</h3>
-                                <p class="text-xs text-gray-400 mt-1">Memorize the glowing grid pattern and repeat the sequence correctly.</p>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-[10px] uppercase text-gray-400 block font-bold">Current Level</span>
-                                <span id="memory-level" class="text-lg font-extrabold text-rose-400">Level 1</span>
-                            </div>
-                        </div>
-
-                        <div class="max-w-sm mx-auto space-y-6 text-center">
-                            <p id="memory-status" class="text-sm font-semibold text-rose-300">Click Start Game to begin pattern generation.</p>
-
-                            <!-- 3x3 Grid -->
-                            <div class="grid grid-cols-3 gap-3 aspect-square bg-[#0a0508] p-4 rounded-3xl border border-rose-900/40">
-                                <button onclick="clickMemoryCell(0)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="0"></button>
-                                <button onclick="clickMemoryCell(1)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="1"></button>
-                                <button onclick="clickMemoryCell(2)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="2"></button>
-                                <button onclick="clickMemoryCell(3)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="3"></button>
-                                <button onclick="clickMemoryCell(4)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="4"></button>
-                                <button onclick="clickMemoryCell(5)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="5"></button>
-                                <button onclick="clickMemoryCell(6)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="6"></button>
-                                <button onclick="clickMemoryCell(7)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="7"></button>
-                                <button onclick="clickMemoryCell(8)" class="memory-cell rounded-2xl bg-[#120712] border border-rose-900/30 transition-all" data-index="8"></button>
-                            </div>
-
-                            <button onclick="startMemoryGame()" id="memory-start-btn" class="w-full py-3.5 bg-gradient-to-r from-rose-700 to-rose-900 hover:from-rose-600 text-white font-bold rounded-xl text-sm shadow-md">
-                                Start Memory Game
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- TAB 3: ROADMAP & UPDATES -->
-                <section id="tab-roadmap" class="tab-content space-y-6 hidden">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div>
-                            <h2 class="text-2xl font-extrabold text-white">Community Creator Roadmap</h2>
-                            <p class="text-xs text-gray-400 mt-1">Vote on upcoming AI features, game expansion packs, and platform updates.</p>
-                        </div>
-                        <button onclick="openSuggestModal()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-700 to-rose-900 hover:from-rose-600 text-white font-bold text-xs shadow-md flex items-center space-x-2">
-                            <i class="fa-solid fa-plus"></i>
-                            <span>Suggest Feature</span>
+                    <div class="flex justify-center gap-3">
+                        <button onclick="submitCipherUnlock()" class="maroon-gradient-btn px-8 py-3 rounded-xl font-bold text-white shadow-lg flex items-center gap-2">
+                            <i data-lucide="unlock" class="w-4 h-4"></i> Attempt Breach
+                        </button>
+                        <button onclick="initCipherVault()" class="px-4 py-3 rounded-xl bg-ryzer-card border border-ryzer-crimson/30 text-gray-300 hover:text-white font-bold text-xs">
+                            Reset Code
                         </button>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Planned Column -->
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between px-2">
-                                <h3 class="text-xs font-extrabold uppercase tracking-widest text-gray-400">Planned Q3</h3>
-                                <span class="px-2 py-0.5 rounded-md bg-rose-950 text-rose-400 text-[10px] font-bold">2 items</span>
-                            </div>
-                            <div class="glass-panel p-4 rounded-2xl border border-rose-900/30 space-y-3">
-                                <span class="px-2.5 py-0.5 rounded-full bg-rose-950/80 text-rose-400 text-[10px] font-bold">AI Multiplayer</span>
-                                <h4 class="text-sm font-bold text-white">Real-Time Co-Op Guessing</h4>
-                                <p class="text-xs text-gray-400">Play head-to-head with friends in real-time guessing matches against Riz AI.</p>
-                                <div class="flex items-center justify-between pt-2 border-t border-rose-900/20 text-xs text-gray-500">
-                                    <span><i class="fa-solid fa-arrow-up text-rose-500 mr-1"></i> 142 upvotes</span>
-                                    <button onclick="upvoteFeature(this)" class="text-rose-400 hover:underline font-semibold">Upvote</button>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Attempt History Log -->
+                    <div id="cipher-log" class="max-h-36 overflow-y-auto space-y-2 text-xs text-left bg-ryzer-dark/80 p-3 rounded-xl border border-ryzer-crimson/10 font-mono">
+                        <p class="text-gray-500 italic">No breach attempts recorded yet.</p>
+                    </div>
+                </div>
+            </div>
 
-                        <!-- In Progress Column -->
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between px-2">
-                                <h3 class="text-xs font-extrabold uppercase tracking-widest text-amber-400">In Progress</h3>
-                                <span class="px-2 py-0.5 rounded-md bg-amber-950 text-amber-400 text-[10px] font-bold">1 item</span>
-                            </div>
-                            <div class="glass-panel p-4 rounded-2xl border border-rose-900/30 space-y-3">
-                                <span class="px-2.5 py-0.5 rounded-full bg-amber-950/80 text-amber-400 text-[10px] font-bold">Voice Synthesis</span>
-                                <h4 class="text-sm font-bold text-white">Riz AI Voice Companion</h4>
-                                <p class="text-xs text-gray-400">Speech recognition and custom voice prompts for all tour guides and game modes.</p>
-                                <div class="flex items-center justify-between pt-2 border-t border-rose-900/20 text-xs text-gray-500">
-                                    <span><i class="fa-solid fa-arrow-up text-rose-500 mr-1"></i> 289 upvotes</span>
-                                    <button onclick="upvoteFeature(this)" class="text-rose-400 hover:underline font-semibold">Upvote</button>
-                                </div>
-                            </div>
-                        </div>
+            <!-- GAME 3 CONTAINER: REFLEX TAP -->
+            <div id="game-container-reflex" class="game-stage glass-panel p-6 sm:p-8 rounded-3xl border border-ryzer-crimson/30 hidden">
+                <div class="max-w-lg mx-auto text-center space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ryzer-maroon/40 text-xs font-bold text-ryzer-crimson border border-ryzer-crimson/30">
+                        <i data-lucide="zap" class="w-4 h-4"></i> 10-Second Reflex Test
+                    </div>
+                    <h2 class="font-display text-3xl font-black text-white">REFLEX TAP CPS TEST</h2>
 
-                        <!-- Completed Column -->
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between px-2">
-                                <h3 class="text-xs font-extrabold uppercase tracking-widest text-emerald-400">Shipped Live</h3>
-                                <span class="px-2 py-0.5 rounded-md bg-emerald-950 text-emerald-400 text-[10px] font-bold">4 items</span>
-                            </div>
-                            <div class="glass-panel p-4 rounded-2xl border border-rose-900/30 space-y-3">
-                                <span class="px-2.5 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 text-[10px] font-bold">Live Feature</span>
-                                <h4 class="text-sm font-bold text-white">4 Signature Game Arenas</h4>
-                                <p class="text-xs text-gray-400">Guess & Play, Cipher Vault, Reflex Tap, and Memory Matrix fully deployed!</p>
-                                <div class="flex items-center justify-between pt-2 border-t border-rose-900/20 text-xs text-emerald-400">
-                                    <span><i class="fa-solid fa-check mr-1"></i> Live on Platform</span>
-                                    <span class="font-bold">Completed</span>
-                                </div>
-                            </div>
+                    <div class="grid grid-cols-3 gap-3 bg-ryzer-dark p-4 rounded-2xl border border-ryzer-crimson/20 text-center">
+                        <div>
+                            <span class="text-[10px] uppercase text-gray-400 font-semibold">Time Remaining</span>
+                            <p id="reflex-timer" class="font-display text-xl font-black text-white">10.0s</p>
+                        </div>
+                        <div>
+                            <span class="text-[10px] uppercase text-gray-400 font-semibold">Total Taps</span>
+                            <p id="reflex-clicks" class="font-display text-xl font-black text-ryzer-crimson">0</p>
+                        </div>
+                        <div>
+                            <span class="text-[10px] uppercase text-gray-400 font-semibold">Live CPS</span>
+                            <p id="reflex-cps" class="font-display text-xl font-black text-amber-400">0.0</p>
                         </div>
                     </div>
-                </section>
 
-                <!-- TAB 4: PROFILE & LOGOUT -->
-                <section id="tab-profile" class="tab-content space-y-6 hidden">
-                    <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-rose-900/45 max-w-2xl mx-auto space-y-6">
-                        <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 pb-6 border-b border-rose-900/30">
-                            <div id="profile-avatar-box" class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-rose-900 to-rose-600 flex items-center justify-center text-white text-3xl shadow-xl shadow-rose-900/50">
-                                <i class="fa-solid fa-robot"></i>
-                            </div>
-                            <div class="text-center sm:text-left">
-                                <h2 class="text-2xl font-extrabold text-white" id="profile-username">Creator</h2>
-                                <p class="text-xs text-rose-400 font-semibold mt-0.5" id="profile-level-title">Level 1 Creator</p>
-                                <span class="inline-block mt-2 px-3 py-1 rounded-full bg-rose-950 text-rose-300 text-[10px] font-bold uppercase tracking-wider">Instant Creator Mode Active</span>
-                            </div>
+                    <!-- Tap Trigger Button -->
+                    <div class="py-4">
+                        <button id="reflex-tap-button" onclick="handleReflexClick()" class="w-48 h-48 rounded-full bg-gradient-to-tr from-ryzer-maroon via-ryzer-crimson to-red-500 mx-auto border-4 border-white/20 shadow-2xl shadow-ryzer-crimson/50 active:scale-95 transition-transform flex flex-col items-center justify-center p-4 cursor-pointer select-none">
+                            <i data-lucide="mouse-pointer-click" class="w-10 h-10 text-white mb-2 animate-bounce"></i>
+                            <span id="reflex-btn-label" class="font-display font-black text-lg text-white">TAP TO START</span>
+                        </button>
+                    </div>
+
+                    <div id="reflex-results-box" class="hidden bg-ryzer-dark p-4 rounded-xl border border-ryzer-crimson/40 text-center space-y-2">
+                        <h3 class="font-display text-lg font-bold text-white">TEST COMPLETE!</h3>
+                        <p class="text-sm text-gray-300" id="reflex-summary-text"></p>
+                        <button onclick="resetReflexGame()" class="maroon-gradient-btn px-6 py-2 rounded-xl text-xs font-bold text-white">Try Again</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAME 4 CONTAINER: MEMORY MATRIX -->
+            <div id="game-container-matrix" class="game-stage glass-panel p-6 sm:p-8 rounded-3xl border border-ryzer-crimson/30 hidden">
+                <div class="max-w-md mx-auto text-center space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ryzer-maroon/40 text-xs font-bold text-ryzer-crimson border border-ryzer-crimson/30">
+                        <i data-lucide="grid" class="w-4 h-4"></i> Cognitive Pattern Recall
+                    </div>
+                    <h2 class="font-display text-3xl font-black text-white">MEMORY MATRIX</h2>
+                    <p class="text-xs text-gray-300">Memorize and repeat the illuminated cell sequence!</p>
+
+                    <div class="flex justify-between items-center bg-ryzer-dark px-4 py-2 rounded-xl border border-ryzer-crimson/20 text-xs">
+                        <span class="text-gray-400">Round: <strong id="matrix-level" class="text-white text-sm">1</strong></span>
+                        <span id="matrix-status" class="text-ryzer-crimson font-bold">Press Start</span>
+                    </div>
+
+                    <!-- 3x3 Grid -->
+                    <div class="grid grid-cols-3 gap-3 max-w-xs mx-auto py-2">
+                        <button onclick="handleMatrixTileClick(0)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="0"></button>
+                        <button onclick="handleMatrixTileClick(1)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="1"></button>
+                        <button onclick="handleMatrixTileClick(2)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="2"></button>
+                        <button onclick="handleMatrixTileClick(3)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="3"></button>
+                        <button onclick="handleMatrixTileClick(4)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="4"></button>
+                        <button onclick="handleMatrixTileClick(5)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="5"></button>
+                        <button onclick="handleMatrixTileClick(6)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="6"></button>
+                        <button onclick="handleMatrixTileClick(7)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="7"></button>
+                        <button onclick="handleMatrixTileClick(8)" class="matrix-tile aspect-square bg-ryzer-dark border border-ryzer-crimson/20 rounded-2xl transition-all duration-300 hover:border-ryzer-crimson/60" data-index="8"></button>
+                    </div>
+
+                    <div class="flex justify-center gap-3">
+                        <button onclick="startMatrixGame()" class="maroon-gradient-btn px-8 py-3 rounded-xl font-bold text-white shadow-lg">Start Game</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VIEW 3: ROADMAP & COMMUNITY ================= -->
+        <section id="view-roadmap" class="view-content hidden space-y-6">
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-ryzer-crimson/30">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h2 class="font-display text-3xl font-black text-white">CREATOR ROADMAP</h2>
+                        <p class="text-sm text-gray-400 mt-1">Vote for upcoming platform tools and AI enhancements.</p>
+                    </div>
+                    <button onclick="showFeatureProposalModal()" class="maroon-gradient-btn px-5 py-2.5 rounded-xl font-bold text-xs text-white flex items-center gap-2 self-start md:self-auto">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i> Propose Feature
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Column 1: Live -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2 pb-2 border-b border-green-500/30">
+                            <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+                            <h3 class="font-display font-bold text-sm text-white uppercase">Live Features</h3>
+                        </div>
+                        
+                        <div class="glass-panel p-4 rounded-xl border border-green-500/20">
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-green-500/20 text-green-400">LIVE</span>
+                            <h4 class="font-bold text-white text-sm mt-2">Cyber Arcade Games</h4>
+                            <p class="text-xs text-gray-400 mt-1">4 playable interactive games with real-time XP gamification reward engine.</p>
                         </div>
 
-                        <div class="space-y-4">
-                            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Creator Progress & Statistics</h3>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-[#0a0508] p-4 rounded-2xl border border-rose-900/30">
-                                    <span class="text-xs text-gray-400 block font-bold">Total XP Earned</span>
-                                    <span class="text-xl font-extrabold text-white mt-1 block" id="profile-xp">0 XP</span>
-                                </div>
-                                <div class="bg-[#0a0508] p-4 rounded-2xl border border-rose-900/30">
-                                    <span class="text-xs text-gray-400 block font-bold">Total Games Played</span>
-                                    <span class="text-xl font-extrabold text-rose-500 mt-1 block" id="profile-games">0</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-4 pt-4 border-t border-rose-900/30">
-                            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Account Management</h3>
-                            <p class="text-xs text-gray-400">Want to switch accounts or create a brand new creator ID? Log out below to return to the authentication screen.</p>
-                            
-                            <!-- LOGOUT / SWITCH ACCOUNT BUTTON -->
-                            <button onclick="handleLogout()" class="w-full py-3.5 bg-rose-950/80 border border-rose-700/50 hover:bg-rose-900 text-rose-200 hover:text-white font-bold rounded-xl text-sm shadow-md transition-all flex items-center justify-center space-x-2">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                <span>Log Out & Create Another ID</span>
-                            </button>
+                        <div class="glass-panel p-4 rounded-xl border border-green-500/20">
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-green-500/20 text-green-400">LIVE</span>
+                            <h4 class="font-bold text-white text-sm mt-2">Animated AI Companion</h4>
+                            <p class="text-xs text-gray-400 mt-1">Interactive bot Riz with custom tour overlay and automated query assistant.</p>
                         </div>
                     </div>
-                </section>
-            </main>
+
+                    <!-- Column 2: In Progress -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2 pb-2 border-b border-amber-500/30">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+                            <h3 class="font-display font-bold text-sm text-white uppercase">In Development</h3>
+                        </div>
+
+                        <div id="roadmap-item-1" class="glass-panel p-4 rounded-xl border border-amber-500/20">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">IN PROGRESS</span>
+                                <button onclick="voteRoadmapItem(1)" class="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-lg bg-ryzer-maroon/50 text-ryzer-crimson border border-ryzer-crimson/30 hover:bg-ryzer-maroon">
+                                    <i data-lucide="thumbs-up" class="w-3 h-3"></i> <span id="roadmap-votes-1">142</span>
+                                </button>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mt-2">Global Multiplayer Leaderboards</h4>
+                            <p class="text-xs text-gray-400 mt-1">Firestore-backed real-time ranking table for high scores across all creators.</p>
+                        </div>
+
+                        <div id="roadmap-item-2" class="glass-panel p-4 rounded-xl border border-amber-500/20">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">IN PROGRESS</span>
+                                <button onclick="voteRoadmapItem(2)" class="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-lg bg-ryzer-maroon/50 text-ryzer-crimson border border-ryzer-crimson/30 hover:bg-ryzer-maroon">
+                                    <i data-lucide="thumbs-up" class="w-3 h-3"></i> <span id="roadmap-votes-2">98</span>
+                                </button>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mt-2">Custom AI Avatar Generator</h4>
+                            <p class="text-xs text-gray-400 mt-1">Generate unique animated profile avatars using Gemini Flash image capabilities.</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Planned -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2 pb-2 border-b border-ryzer-crimson/30">
+                            <span class="w-2.5 h-2.5 rounded-full bg-ryzer-crimson"></span>
+                            <h3 class="font-display font-bold text-sm text-white uppercase">Planned Ideas</h3>
+                        </div>
+
+                        <div id="roadmap-item-3" class="glass-panel p-4 rounded-xl border border-ryzer-crimson/20">
+                            <div class="flex justify-between items-start">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-ryzer-maroon text-ryzer-crimson">PLANNED</span>
+                                <button onclick="voteRoadmapItem(3)" class="flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-lg bg-ryzer-maroon/50 text-ryzer-crimson border border-ryzer-crimson/30 hover:bg-ryzer-maroon">
+                                    <i data-lucide="thumbs-up" class="w-3 h-3"></i> <span id="roadmap-votes-3">215</span>
+                                </button>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mt-2">Ryzer Live Audio Chat Voice</h4>
+                            <p class="text-xs text-gray-400 mt-1">Native low-latency voice interactions with Riz via Gemini Live WebSocket API.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VIEW 4: USER PROFILE & STATS ================= -->
+        <section id="view-profile" class="view-content hidden space-y-6">
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-ryzer-crimson/30 max-w-3xl mx-auto">
+                <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-ryzer-crimson/20">
+                    <div class="relative w-24 h-24 rounded-2xl bg-gradient-to-tr from-ryzer-maroon to-ryzer-crimson p-[3px] animate-pulse-glow shrink-0">
+                        <img id="profile-avatar-img" src="https://placehold.co/150x150/7a0016/ffffff?text=Creator" alt="User Avatar" class="w-full h-full object-cover rounded-[13px] bg-ryzer-dark">
+                    </div>
+
+                    <div class="text-center sm:text-left space-y-1 flex-grow">
+                        <div class="flex items-center justify-center sm:justify-start gap-2">
+                            <h2 class="font-display text-2xl font-black text-white" id="profile-display-name">Guest Creator</h2>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-ryzer-maroon text-ryzer-crimson border border-ryzer-crimson/30" id="profile-level-badge">LVL 1</span>
+                        </div>
+                        <p class="text-xs text-gray-400" id="profile-email-text">Not logged in (Guest Session)</p>
+                        <p class="text-xs font-semibold text-ryzer-crimson" id="profile-title-text">Title: Novice Cyber Creator</p>
+                    </div>
+
+                    <button onclick="handleSignOut()" id="profile-logout-btn" class="px-4 py-2 rounded-xl bg-red-900/40 text-red-300 border border-red-500/30 hover:bg-red-800/60 font-bold text-xs flex items-center gap-2 shrink-0">
+                        <i data-lucide="log-out" class="w-4 h-4"></i> Switch / Log Out
+                    </button>
+                </div>
+
+                <!-- XP & Progression Details -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="font-display font-bold text-lg text-white">Level Progression</h3>
+                    <div class="bg-ryzer-dark p-4 rounded-2xl border border-ryzer-crimson/20 space-y-2">
+                        <div class="flex justify-between text-xs font-bold">
+                            <span class="text-gray-400">Current Level Progress</span>
+                            <span class="text-ryzer-crimson" id="profile-xp-ratio">0 / 200 XP</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
+                            <div id="profile-xp-progress" class="bg-gradient-to-r from-ryzer-maroon via-ryzer-crimson to-amber-500 h-full w-0 transition-all duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unlocked Achievements Badges -->
+                <div class="space-y-4 pt-2">
+                    <h3 class="font-display font-bold text-lg text-white">Earned Badges & Feats</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div class="bg-ryzer-dark p-3 rounded-xl border border-ryzer-crimson/20 text-center space-y-1">
+                            <i data-lucide="award" class="w-6 h-6 text-ryzer-crimson mx-auto"></i>
+                            <p class="text-xs font-bold text-white">Initiate</p>
+                            <p class="text-[10px] text-gray-500">Joined Ryzer's.ai</p>
+                        </div>
+                        <div class="bg-ryzer-dark p-3 rounded-xl border border-ryzer-crimson/20 text-center space-y-1 opacity-50" id="badge-vault">
+                            <i data-lucide="key" class="w-6 h-6 text-amber-400 mx-auto"></i>
+                            <p class="text-xs font-bold text-white">Vault Breaker</p>
+                            <p class="text-[10px] text-gray-500">Solved Cipher</p>
+                        </div>
+                        <div class="bg-ryzer-dark p-3 rounded-xl border border-ryzer-crimson/20 text-center space-y-1 opacity-50" id="badge-reflex">
+                            <i data-lucide="zap" class="w-6 h-6 text-yellow-400 mx-auto"></i>
+                            <p class="text-xs font-bold text-white">Speed Demon</p>
+                            <p class="text-[10px] text-gray-500">Reached 8+ CPS</p>
+                        </div>
+                        <div class="bg-ryzer-dark p-3 rounded-xl border border-ryzer-crimson/20 text-center space-y-1 opacity-50" id="badge-matrix">
+                            <i data-lucide="brain" class="w-6 h-6 text-purple-400 mx-auto"></i>
+                            <p class="text-xs font-bold text-white">Grandmind</p>
+                            <p class="text-[10px] text-gray-500">Matrix Round 5+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Riz AI Assistant Avatar Widget -->
+    <div id="riz-floating-widget" class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+        
+        <!-- Riz Bubble Quick Hint -->
+        <div id="riz-bubble-hint" class="glass-panel p-3 rounded-2xl mb-2 text-xs font-semibold text-white border border-ryzer-crimson/40 max-w-xs shadow-xl animate-float cursor-pointer flex items-center gap-2" onclick="openRizChat()">
+            <span class="w-2 h-2 rounded-full bg-ryzer-crimson animate-ping"></span>
+            <span>Hi! I'm Riz. Need help or arcade tips?</span>
+        </div>
+
+        <button onclick="toggleRizChat()" class="relative group p-1.5 rounded-2xl bg-gradient-to-tr from-ryzer-maroon to-ryzer-crimson animate-pulse-glow shadow-2xl transition-transform hover:scale-105">
+            <div class="w-14 h-14 bg-ryzer-dark rounded-[14px] flex items-center justify-center relative overflow-hidden">
+                <i data-lucide="bot" class="w-8 h-8 text-ryzer-crimson"></i>
+            </div>
+        </button>
+    </div>
+
+    <!-- Riz AI Chatbot Modal Drawer -->
+    <div id="riz-chat-modal" class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 glass-panel rounded-3xl border border-ryzer-crimson/40 shadow-2xl hidden overflow-hidden flex flex-col h-[460px]">
+        <!-- Chat Header -->
+        <div class="p-4 bg-ryzer-maroon/60 border-b border-ryzer-crimson/30 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-ryzer-dark flex items-center justify-center border border-ryzer-crimson/40">
+                    <i data-lucide="bot" class="w-5 h-5 text-ryzer-crimson"></i>
+                </div>
+                <div>
+                    <h3 class="font-display font-bold text-sm text-white">Riz AI Assistant</h3>
+                    <p class="text-[10px] text-green-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Active & Online</p>
+                </div>
+            </div>
+            <button onclick="toggleRizChat()" class="text-gray-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div id="riz-chat-messages" class="flex-grow p-4 overflow-y-auto space-y-3 text-xs">
+            <div class="flex items-start gap-2">
+                <div class="w-6 h-6 rounded-md bg-ryzer-maroon flex items-center justify-center shrink-0 text-white font-bold text-[10px]">RIZ</div>
+                <div class="bg-ryzer-card border border-ryzer-crimson/20 p-3 rounded-2xl rounded-tl-none text-gray-200">
+                    Greetings Creator! I am Riz, your synthetic companion. Ask me anything about earning XP, solving the Cipher Vault, or leveling up your profile!
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Predefined Prompts -->
+        <div class="p-2 bg-ryzer-dark/90 border-t border-ryzer-crimson/20 flex gap-1.5 overflow-x-auto text-[10px]">
+            <button onclick="sendQuickPrompt('How do I earn XP?')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-ryzer-card text-gray-300 border border-ryzer-crimson/20 hover:border-ryzer-crimson/60">How to earn XP?</button>
+            <button onclick="sendQuickPrompt('Cipher Vault hint')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-ryzer-card text-gray-300 border border-ryzer-crimson/20 hover:border-ryzer-crimson/60">Cipher Hint</button>
+            <button onclick="sendQuickPrompt('Tell me about Riz')" class="whitespace-nowrap px-2.5 py-1 rounded-lg bg-ryzer-card text-gray-300 border border-ryzer-crimson/20 hover:border-ryzer-crimson/60">About Riz</button>
+        </div>
+
+        <!-- Chat Input Form -->
+        <form onsubmit="handleRizChatSubmit(event)" class="p-3 bg-ryzer-dark border-t border-ryzer-crimson/20 flex gap-2">
+            <input type="text" id="riz-chat-input" placeholder="Ask Riz a question..." class="flex-grow bg-ryzer-card border border-ryzer-crimson/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-ryzer-crimson">
+            <button type="submit" class="maroon-gradient-btn px-3 py-2 rounded-xl text-white font-bold"><i data-lucide="send" class="w-4 h-4"></i></button>
+        </form>
+    </div>
+
+    <!-- Riz Interactive Guided Tour Overlay Modal -->
+    <div id="riz-tour-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="glass-panel max-w-md w-full p-6 sm:p-8 rounded-3xl border-2 border-ryzer-crimson/50 shadow-2xl relative text-center space-y-5 animate-float">
+            
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-ryzer-maroon to-ryzer-crimson mx-auto p-1 animate-pulse-glow flex items-center justify-center">
+                <div class="w-full h-full bg-ryzer-dark rounded-[12px] flex items-center justify-center">
+                    <i data-lucide="bot" class="w-8 h-8 text-ryzer-crimson"></i>
+                </div>
+            </div>
+
+            <h3 id="tour-step-title" class="font-display font-black text-2xl text-white">WELCOME TO RYZER'S.AI</h3>
+            <p id="tour-step-desc" class="text-sm text-gray-300 leading-relaxed">
+                I am Riz, your dedicated AI guide. Let me show you around our luxury crimson platform!
+            </p>
+
+            <div class="flex justify-between items-center pt-4 border-t border-ryzer-crimson/20">
+                <span id="tour-step-indicator" class="text-xs font-bold text-gray-500">Step 1 of 4</span>
+                <div class="flex gap-2">
+                    <button onclick="skipTour()" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-white">Skip</button>
+                    <button onclick="nextTourStep()" id="tour-next-btn" class="maroon-gradient-btn px-5 py-2 rounded-xl text-xs font-bold text-white">Next</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // Global App State
-        let state = {
-            username: localStorage.getItem('ryzer_username') || '',
-            avatar: localStorage.getItem('ryzer_avatar') || 'fa-robot',
-            xp: parseInt(localStorage.getItem('ryzer_xp') || '0'),
-            gamesPlayed: parseInt(localStorage.getItem('ryzer_games') || '0'),
-            tourStep: 0,
-            hasSeenTour: localStorage.getItem('ryzer_tour_seen') === 'true'
+    <!-- Firebase Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="glass-panel max-w-sm w-full p-6 sm:p-8 rounded-3xl border border-ryzer-crimson/40 relative space-y-6">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+
+            <div class="text-center space-y-2">
+                <h3 class="font-display font-black text-2xl text-white">CREATOR ACCESS</h3>
+                <p class="text-xs text-gray-400">Sign in to preserve your level, stats, and achievements in Firestore.</p>
+            </div>
+
+            <!-- Google Sign In Button -->
+            <button onclick="handleGoogleSignIn()" class="w-full bg-white text-gray-900 hover:bg-gray-100 font-bold py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-3 shadow-lg transition-all">
+                <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                Continue with Google
+            </button>
+
+            <div class="flex items-center gap-3 my-2">
+                <div class="flex-grow h-px bg-ryzer-crimson/20"></div>
+                <span class="text-[10px] text-gray-500 font-bold uppercase">Or Email Sign In</span>
+                <div class="flex-grow h-px bg-ryzer-crimson/20"></div>
+            </div>
+
+            <!-- Email Auth Form -->
+            <form onsubmit="handleEmailAuth(event)" class="space-y-3">
+                <input type="email" id="auth-email" placeholder="Email Address" required class="w-full bg-ryzer-dark border border-ryzer-crimson/30 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-ryzer-crimson">
+                <input type="password" id="auth-password" placeholder="Password" required class="w-full bg-ryzer-dark border border-ryzer-crimson/30 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-ryzer-crimson">
+                <button type="submit" class="w-full maroon-gradient-btn py-2.5 rounded-xl text-xs font-bold text-white">Sign In / Register</button>
+            </form>
+
+            <div class="pt-2 text-center">
+                <button onclick="handleGuestSignIn()" class="text-xs text-gray-400 hover:text-ryzer-crimson font-semibold underline">Continue as Guest Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="fixed top-24 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Footer -->
+    <footer class="glass-panel border-t border-ryzer-crimson/20 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500">
+            <p>© 2026 Ryzer's.ai - Built with Luxury Crimson Dark Theme & Gemini Engine.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Required Firebase Configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAttkr92rj3m0RfGu2M6YlUNAKXSLTPIqg",
+          authDomain: "ryzer-ca056.firebaseapp.com",
+          projectId: "ryzer-ca056",
+          storageBucket: "ryzer-ca056.firebasestorage.app",
+          messagingSenderId: "301682022828",
+          appId: "1:301682022828:web:db7e567f804206f9666209",
+          measurementId: "G-06NH1G1PB1"
         };
 
-        // Tour Steps Data
-        const tourSteps = [
-            {
-                title: "Welcome to Ryzer's.ai!",
-                desc: "Hello Creator! I'm Riz, your AI assistant. Let me take you on a quick tour of our sleek black & maroon platform."
-            },
-            {
-                title: "4 Signature Game Arenas",
-                desc: "Challenge your mind with Guess & Play, Cipher Vault code cracking, Reflex Tap speed tests, and Memory Matrix sequences!"
-            },
-            {
-                title: "XP & Level Progression",
-                desc: "Every game you play and tour step you complete rewards XP. Level up your creator rank and unlock elite badges!"
-            },
-            {
-                title: "Community & Profile Switcher",
-                desc: "Vote on upcoming updates in our Roadmap, or use the Log Out option in Profile anytime to create another ID."
-            }
-        ];
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // Initialization on Load
-        window.onload = function() {
-            if (state.username) {
-                document.getElementById('auth-screen').classList.add('hidden');
-                document.getElementById('main-app').classList.remove('hidden');
-                updateUIState();
-                if (!state.hasSeenTour) {
-                    startRizTour();
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'ryzer-app';
+
+        // State Store
+        window.appState = {
+            user: null,
+            xp: 0,
+            level: 1,
+            stats: {
+                peakCPS: 0.0,
+                vaultsCleared: 0,
+                gamesPlayed: 0
+            },
+            roadmapVotes: { 1: 142, 2: 98, 3: 215 },
+            votedItems: new Set()
+        };
+
+        // Web Audio Synthesizer for Interactive Sound Effects
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSfx(type) {
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'click') {
+                    osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.05);
+                } else if (type === 'win') {
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+                    osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.2); // G5
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.4);
+                } else if (type === 'error') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.2);
                 }
+            } catch(e) { console.log("Audio SFX ignored"); }
+        }
+
+        window.addXP = async function(amount, reason = "Game Victory") {
+            playSfx('win');
+            window.appState.xp += amount;
+            
+            // Level formula: Level = floor(XP / 200) + 1
+            const newLevel = Math.floor(window.appState.xp / 200) + 1;
+            const leveledUp = newLevel > window.appState.level;
+            window.appState.level = newLevel;
+
+            showToast(`+${amount} XP Earned! (${reason})`, "success");
+            if (leveledUp) {
+                showToast(`🎉 LEVEL UP! You reached Level ${newLevel}!`, "warning");
             }
+
+            updateUI();
+            saveUserData();
         };
 
-        // Avatar Selection in Auth
-        let selectedAvatarChoice = 'fa-robot';
-        function selectAvatar(iconClass) {
-            document.querySelectorAll('.avatar-opt').forEach(btn => btn.classList.remove('border-rose-500', 'bg-rose-950/40'));
-            const btn = document.querySelector(`[data-avatar="${iconClass}"]`);
-            if(btn) {
-                btn.classList.add('border-rose-500', 'bg-rose-950/40');
-            }
-            selectedAvatarChoice = iconClass;
-        }
-
-        // Authentication Handlers
-        function handleLogin() {
-            const usernameInput = document.getElementById('auth-username').value.trim();
-            if(!usernameInput) {
-                showToast("Please enter a valid Creator ID or username!");
-                return;
-            }
-            state.username = usernameInput;
-            state.avatar = selectedAvatarChoice;
-            saveState();
-            
-            document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('main-app').classList.remove('hidden');
-            updateUIState();
-            showToast(`Welcome aboard, ${state.username}!`);
-            
-            if(!state.hasSeenTour) {
-                startRizTour();
-            }
-        }
-
-        function handleFirebaseLogin() {
-            // Simulated secure Firebase authentication fallback
-            const randomId = 'Firebase_Creator_' + Math.floor(Math.random() * 8999 + 1000);
-            state.username = randomId;
-            state.avatar = 'fa-bolt';
-            saveState();
-
-            document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('main-app').classList.remove('hidden');
-            updateUIState();
-            showToast(`Firebase authenticated successfully as ${randomId}!`);
-            
-            if(!state.hasSeenTour) {
-                startRizTour();
-            }
-        }
-
-        function handleLogout() {
-            // Clear local session and return to Auth screen
-            localStorage.removeItem('ryzer_username');
-            localStorage.removeItem('ryzer_avatar');
-            localStorage.removeItem('ryzer_xp');
-            localStorage.removeItem('ryzer_games');
-            localStorage.removeItem('ryzer_tour_seen');
-            
-            state.username = '';
-            state.xp = 0;
-            state.gamesPlayed = 0;
-            
-            document.getElementById('main-app').classList.add('hidden');
-            document.getElementById('auth-screen').classList.remove('hidden');
-            document.getElementById('auth-username').value = '';
-            showToast("Successfully signed out. Create another ID anytime!");
-        }
-
-        function saveState() {
-            localStorage.setItem('ryzer_username', state.username);
-            localStorage.setItem('ryzer_avatar', state.avatar);
-            localStorage.setItem('ryzer_xp', state.xp);
-            localStorage.setItem('ryzer_games', state.gamesPlayed);
-            localStorage.setItem('ryzer_tour_seen', state.hasSeenTour);
-        }
-
-        function updateUIState() {
-            const level = Math.floor(state.xp / 100) + 1;
-            const levelTitle = `Level ${level} Creator`;
-            
-            document.getElementById('nav-username').innerText = state.username;
-            document.getElementById('dash-username').innerText = state.username;
-            document.getElementById('profile-username').innerText = state.username;
-            
-            document.getElementById('nav-xp').innerText = state.xp;
-            document.getElementById('stat-xp').innerText = state.xp;
-            document.getElementById('profile-xp').innerText = state.xp + ' XP';
-            
-            document.getElementById('nav-level-title').innerText = levelTitle;
-            document.getElementById('stat-level').innerText = `Level ${level}`;
-            document.getElementById('profile-level-title').innerText = levelTitle;
-            
-            document.getElementById('stat-games-played').innerText = state.gamesPlayed;
-            document.getElementById('profile-games').innerText = state.gamesPlayed;
-
-            const avatarHTML = `<i class="fa-solid ${state.avatar}"></i>`;
-            document.getElementById('nav-user-avatar').innerHTML = avatarHTML;
-            document.getElementById('profile-avatar-box').innerHTML = avatarHTML;
-        }
-
-        function addXP(amount) {
-            state.xp += amount;
-            state.gamesPlayed += 1;
-            saveState();
-            updateUIState();
-            showToast(`+${amount} XP Earned!`);
-        }
-
-        // Navigation Tabs
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-rose-950', 'text-white'));
-            
-            const targetTab = document.getElementById(`tab-${tabId}`);
-            if(targetTab) targetTab.classList.remove('hidden');
-            
-            const targetBtn = document.querySelector(`[data-tab="${tabId}"]`);
-            if(targetBtn) targetBtn.classList.add('bg-rose-950', 'text-white');
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // Riz AI Tour Logic
-        function startRizTour() {
-            state.tourStep = 0;
-            renderTourStep();
-            document.getElementById('riz-tour-modal').classList.remove('hidden');
-        }
-
-        function closeRizTour() {
-            document.getElementById('riz-tour-modal').classList.add('hidden');
-            state.hasSeenTour = true;
-            saveState();
-        }
-
-        function renderTourStep() {
-            const step = tourSteps[state.tourStep];
-            document.getElementById('tour-step-title').innerText = step.title;
-            document.getElementById('tour-step-desc').innerText = step.desc;
-
-            // Render Dots
-            let dotsHTML = '';
-            for(let i=0; i<tourSteps.length; i++) {
-                const activeClass = i === state.tourStep ? 'w-6 bg-rose-500' : 'w-2 bg-rose-950';
-                dotsHTML += `<div class="h-2 rounded-full transition-all ${activeClass}"></div>`;
-            }
-            document.getElementById('tour-dots').innerHTML = dotsHTML;
-
-            // Prev button visibility
-            const prevBtn = document.getElementById('tour-prev-btn');
-            if(state.tourStep === 0) {
-                prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            } else {
-                prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            }
-
-            // Next button text
-            const nextBtn = document.getElementById('tour-next-btn');
-            if(state.tourStep === tourSteps.length - 1) {
-                nextBtn.innerText = "Finish Tour";
-            } else {
-                nextBtn.innerText = "Next Step";
-            }
-        }
-
-        function nextTourStep() {
-            if(state.tourStep < tourSteps.length - 1) {
-                state.tourStep++;
-                renderTourStep();
-            } else {
-                addXP(25);
-                closeRizTour();
-                showToast("Tour completed! +25 XP awarded.");
-            }
-        }
-
-        function prevTourStep() {
-            if(state.tourStep > 0) {
-                state.tourStep--;
-                renderTourStep();
-            }
-        }
-
-        // Games Hub navigation
-        function openGame(gameId) {
-            switchTab('games');
-            document.querySelectorAll('.game-container').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.game-tab-btn').forEach(btn => {
-                btn.classList.remove('bg-rose-900', 'text-white');
-                btn.classList.add('bg-[#120712]', 'text-gray-300');
-            });
-
-            const targetGame = document.getElementById(`game-${gameId}`);
-            if(targetGame) targetGame.classList.remove('hidden');
-
-            const targetBtn = document.querySelector(`[data-game="${gameId}"]`);
-            if(targetBtn) {
-                targetBtn.classList.remove('bg-[#120712]', 'text-gray-300');
-                targetBtn.classList.add('bg-rose-900', 'text-white');
-            }
-        }
-
-        // Game 1: Guess & Play Logic
-        let guessMode = 'user-guess';
-        let aiSecretConcept = 'Smartphone';
-        let userAttemptsLeft = 10;
-
-        function setGuessMode(mode) {
-            guessMode = mode;
-            if(mode === 'user-guess') {
-                document.getElementById('submode-user-guess').classList.remove('hidden');
-                document.getElementById('submode-ai-guess').classList.add('hidden');
-                document.getElementById('mode-btn-user').className = 'px-4 py-2 rounded-lg text-xs font-bold bg-rose-900 text-white transition-all';
-                document.getElementById('mode-btn-ai').className = 'px-4 py-2 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all';
-            } else {
-                document.getElementById('submode-user-guess').classList.add('hidden');
-                document.getElementById('submode-ai-guess').classList.remove('hidden');
-                document.getElementById('mode-btn-ai').className = 'px-4 py-2 rounded-lg text-xs font-bold bg-rose-900 text-white transition-all';
-                document.getElementById('mode-btn-user').className = 'px-4 py-2 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all';
-            }
-        }
-
-        function resetUserGuessGame() {
-            const concepts = ['Smartphone', 'Coffee Mug', 'Artificial Intelligence', 'Rocket Ship', 'Electric Guitar'];
-            aiSecretConcept = concepts[Math.floor(Math.random() * concepts.length)];
-            userAttemptsLeft = 10;
-            document.getElementById('user-attempts').innerText = userAttemptsLeft;
-            document.getElementById('user-chat-log').innerHTML = `
-                <div class="p-3.5 rounded-2xl bg-rose-950/30 border border-rose-900/30 text-xs text-gray-300 flex items-start space-x-3">
-                    <i class="fa-solid fa-robot text-rose-500 mt-0.5"></i>
-                    <div>
-                        <span class="font-bold text-white block mb-0.5">Riz AI</span>
-                        New secret concept locked in! Ask me your Yes/No question.
-                    </div>
-                </div>
-            `;
-        }
-
-        function askUserQuestion() {
-            const input = document.getElementById('user-question-input');
-            const q = input.value.trim();
-            if(!q) return;
-
-            if(userAttemptsLeft <= 0) {
-                showToast("No attempts remaining! Reset the game.");
-                return;
-            }
-
-            userAttemptsLeft--;
-            document.getElementById('user-attempts').innerText = userAttemptsLeft;
-
-            const chatLog = document.getElementById('user-chat-log');
-            chatLog.innerHTML += `
-                <div class="p-3.5 rounded-2xl bg-[#0a0508] border border-rose-900/40 text-xs text-gray-300 flex items-start space-x-3">
-                    <i class="fa-solid fa-user text-rose-400 mt-0.5"></i>
-                    <div>
-                        <span class="font-bold text-white block mb-0.5">You</span>
-                        ${q}
-                    </div>
-                </div>
-            `;
-
-            input.value = '';
-
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `glass-panel px-4 py-3 rounded-xl border text-xs font-bold text-white shadow-xl flex items-center gap-2 pointer-events-auto transition-all transform translate-y-2 ${type === 'success' ? 'border-green-500/50 bg-green-950/80' : type === 'warning' ? 'border-amber-500/50 bg-amber-950/80' : 'border-ryzer-crimson/50 bg-ryzer-card/90'}`;
+            toast.innerHTML = `<i data-lucide="${type === 'success' ? 'check-circle' : 'sparkles'}" class="w-4 h-4 text-ryzer-crimson"></i> ${msg}`;
+            container.appendChild(toast);
+            lucide.createIcons();
             setTimeout(() => {
-                let answer = "Yes, absolutely!";
-                const qLower = q.toLowerCase();
-                if(qLower.includes('living') || qLower.includes('animal') || qLower.includes('person')) {
-                    answer = aiSecretConcept === 'Smartphone' || aiSecretConcept === 'Coffee Mug' || aiSecretConcept === 'Rocket Ship' || aiSecretConcept === 'Electric Guitar' ? "No." : "Yes.";
-                } else if(qLower.includes('tech') || qLower.includes('digital') || qLower.includes('electronic')) {
-                    answer = (aiSecretConcept === 'Smartphone' || aiSecretConcept === 'Artificial Intelligence') ? "Yes! It is tech." : "No.";
-                } else if(qLower.includes(aiSecretConcept.toLowerCase())) {
-                    answer = `Correct! You guessed my secret concept (${aiSecretConcept})! +50 XP!`;
-                    addXP(50);
-                }
+                toast.classList.add('opacity-0', '-translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
 
-                chatLog.innerHTML += `
-                    <div class="p-3.5 rounded-2xl bg-rose-950/30 border border-rose-900/30 text-xs text-gray-300 flex items-start space-x-3">
-                        <i class="fa-solid fa-robot text-rose-500 mt-0.5"></i>
-                        <div>
-                            <span class="font-bold text-white block mb-0.5">Riz AI</span>
-                            ${answer}
-                        </div>
+        async function saveUserData() {
+            localStorage.setItem('ryzer_local_xp', window.appState.xp);
+            localStorage.setItem('ryzer_local_stats', JSON.stringify(window.appState.stats));
+
+            if (window.appState.user) {
+                try {
+                    const userRef = doc(db, 'artifacts', appId, 'users', window.appState.user.uid, 'profile', 'data');
+                    await setDoc(userRef, {
+                        email: window.appState.user.email,
+                        displayName: window.appState.user.displayName || "Creator",
+                        photoURL: window.appState.user.photoURL || "",
+                        xp: window.appState.xp,
+                        level: window.appState.level,
+                        stats: window.appState.stats,
+                        lastActive: new Date().toISOString()
+                    }, { merge: true });
+                } catch(e) {
+                    console.error("Firestore sync error:", e);
+                }
+            }
+        }
+
+        async function loadUserData(user) {
+            if (user) {
+                try {
+                    const userRef = doc(db, 'artifacts', appId, 'users', user.uid, 'profile', 'data');
+                    const snap = await getDoc(userRef);
+                    if (snap.exists()) {
+                        const data = snap.data();
+                        window.appState.xp = data.xp || 0;
+                        window.appState.level = data.level || 1;
+                        window.appState.stats = data.stats || window.appState.stats;
+                    } else {
+                        saveUserData(); // Initialize document
+                    }
+                } catch(e) { console.error("Firestore fetch error:", e); }
+            } else {
+                // Local Guest
+                window.appState.xp = parseInt(localStorage.getItem('ryzer_local_xp') || '0');
+                window.appState.level = Math.floor(window.appState.xp / 200) + 1;
+                const localStats = localStorage.getItem('ryzer_local_stats');
+                if (localStats) window.appState.stats = JSON.parse(localStats);
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            // Navbar
+            document.getElementById('nav-level-text').innerText = `LVL ${window.appState.level}`;
+            document.getElementById('nav-xp-text').innerText = `${window.appState.xp} XP`;
+
+            // Stats
+            document.getElementById('stat-total-xp').innerText = `${window.appState.xp} XP`;
+            document.getElementById('stat-level-num').innerText = window.appState.level;
+            document.getElementById('stat-peak-cps').innerText = `${window.appState.stats.peakCPS.toFixed(1)} CPS`;
+            document.getElementById('stat-vaults-cleared').innerText = window.appState.stats.vaultsCleared;
+
+            const nextLevelXp = window.appState.level * 200;
+            const currentLevelMinXp = (window.appState.level - 1) * 200;
+            const levelProgress = Math.min(100, Math.max(0, ((window.appState.xp - currentLevelMinXp) / (nextLevelXp - currentLevelMinXp)) * 100));
+            document.getElementById('stat-xp-bar').style.width = `${levelProgress}%`;
+
+            // Profile View
+            document.getElementById('profile-xp-ratio').innerText = `${window.appState.xp} / ${nextLevelXp} XP`;
+            document.getElementById('profile-xp-progress').style.width = `${levelProgress}%`;
+            document.getElementById('profile-level-badge').innerText = `LVL ${window.appState.level}`;
+
+            const ranks = ["Novice Creator", "Cyber Rogue", "AI Specialist", "Quantum Architect", "Ryzer Master"];
+            const rankTitle = ranks[Math.min(ranks.length - 1, window.appState.level - 1)];
+            document.getElementById('stat-rank-title').innerText = rankTitle;
+            document.getElementById('profile-title-text').innerText = `Title: ${rankTitle}`;
+
+            if (window.appState.user) {
+                document.getElementById('profile-display-name').innerText = window.appState.user.displayName || "Creator";
+                document.getElementById('profile-email-text').innerText = window.appState.user.email || "Verified Account";
+                if (window.appState.user.photoURL) {
+                    document.getElementById('profile-avatar-img').src = window.appState.user.photoURL;
+                }
+                document.getElementById('auth-header-container').innerHTML = `
+                    <div onclick="switchTab('profile')" class="cursor-pointer flex items-center gap-2 bg-ryzer-card p-1.5 rounded-full border border-ryzer-crimson/30 hover:border-ryzer-crimson">
+                        <img src="${window.appState.user.photoURL || 'https://placehold.co/100x100/7a0016/ffffff?text=U'}" class="w-7 h-7 rounded-full object-cover">
+                        <span class="text-xs font-bold text-white pr-2">${(window.appState.user.displayName || 'Creator').split(' ')[0]}</span>
                     </div>
                 `;
-                chatLog.scrollTop = chatLog.scrollHeight;
-            }, 500);
-        }
-
-        // AI Guesses User State
-        let aiQuestionCount = 1;
-        function startAIGuessSession() {
-            document.getElementById('ai-guess-start-btn').classList.add('hidden');
-            document.getElementById('ai-guess-arena').classList.remove('hidden');
-            aiQuestionCount = 1;
-            document.getElementById('ai-question-counter').innerText = `Question ${aiQuestionCount}`;
-            document.getElementById('ai-current-question').innerText = "Is your secret object physical and touchable?";
-        }
-
-        function answerAIGuess(ans) {
-            aiQuestionCount++;
-            if(aiQuestionCount > 4) {
-                document.getElementById('ai-current-question').innerText = "Aha! Riz AI has guessed your thought: It's a creative masterpiece! +40 XP awarded!";
-                document.getElementById('ai-guess-arena').innerHTML += `<button onclick="resetAIGuessSession()" class="mt-4 w-full py-2.5 bg-rose-900 text-white font-bold rounded-xl text-xs">Play Again</button>`;
-                addXP(40);
-                return;
-            }
-            document.getElementById('ai-question-counter').innerText = `Question ${aiQuestionCount}`;
-            const questions = [
-                "Does it fit inside a standard backpack?",
-                "Is it associated with technology or entertainment?",
-                "Does it cost more than $50?"
-            ];
-            document.getElementById('ai-current-question').innerText = questions[aiQuestionCount - 2] || "Is it colorful?";
-        }
-
-        function resetAIGuessSession() {
-            document.getElementById('ai-guess-start-btn').classList.remove('hidden');
-            document.getElementById('ai-guess-arena').classList.add('hidden');
-        }
-
-        // Game 2: Cipher Vault Logic
-        let vaultSecret = Math.floor(Math.random() * 900 + 100).toString();
-        let vaultAttempts = 7;
-
-        function resetCipherVault() {
-            vaultSecret = Math.floor(Math.random() * 900 + 100).toString();
-            vaultAttempts = 7;
-            document.getElementById('vault-attempts').innerText = vaultAttempts;
-            document.getElementById('vault-digit-0').innerText = '?';
-            document.getElementById('vault-digit-1').innerText = '?';
-            document.getElementById('vault-digit-2').innerText = '?';
-            document.getElementById('vault-input').value = '';
-            document.getElementById('vault-feedback').innerText = "Status: New 3-digit code generated. Enter your guess.";
-            document.getElementById('vault-history').innerHTML = '';
-        }
-
-        function submitVaultCode() {
-            const val = document.getElementById('vault-input').value.trim();
-            if(val.length !== 3) {
-                showToast("Please enter exactly 3 digits!");
-                return;
+            } else {
+                document.getElementById('profile-display-name').innerText = "Guest Creator";
+                document.getElementById('profile-email-text').innerText = "Not logged in (Guest Session)";
+                document.getElementById('auth-header-container').innerHTML = `
+                    <button onclick="openAuthModal()" class="maroon-gradient-btn text-white text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i> Sign In
+                    </button>
+                `;
             }
 
-            vaultAttempts--;
-            document.getElementById('vault-attempts').innerText = vaultAttempts;
+            // Badges
+            if (window.appState.stats.vaultsCleared > 0) document.getElementById('badge-vault').classList.remove('opacity-50');
+            if (window.appState.stats.peakCPS >= 8.0) document.getElementById('badge-reflex').classList.remove('opacity-50');
 
-            let hints = [];
-            let correctCount = 0;
-            for(let i=0; i<3; i++) {
-                if(val[i] === vaultSecret[i]) {
-                    correctCount++;
-                    hints.push(`Digit ${i+1}: Correct!`);
-                } else if(vaultSecret.includes(val[i])) {
-                    hints.push(`Digit ${i+1}: Present but misplaced`);
+            lucide.createIcons();
+        }
+
+        // Firebase Auth Listeners
+        onAuthStateChanged(auth, (user) => {
+            window.appState.user = user;
+            loadUserData(user);
+        });
+
+        window.handleGoogleSignIn = async function() {
+            try {
+                const provider = new GoogleAuthProvider();
+                await signInWithPopup(auth, provider);
+                closeAuthModal();
+                showToast("Signed in with Google successfully!", "success");
+            } catch(e) {
+                showToast("Google Sign In failed: " + e.message, "error");
+            }
+        };
+
+        window.handleEmailAuth = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                closeAuthModal();
+                showToast("Welcome back!", "success");
+            } catch(error) {
+                if (error.code === 'auth/user-not-found') {
+                    try {
+                        await createUserWithEmailAndPassword(auth, email, password);
+                        closeAuthModal();
+                        showToast("Account created successfully!", "success");
+                    } catch(err) { showToast(err.message, "error"); }
                 } else {
-                    hints.push(`Digit ${i+1}: Incorrect`);
+                    showToast(error.message, "error");
                 }
             }
+        };
 
-            const history = document.getElementById('vault-history');
-            history.innerHTML += `<div class="p-2 rounded bg-[#0a0508] border border-rose-900/30 flex justify-between"><span>Guess: <b>${val}</b></span> <span class="text-rose-400">${hints.join(' | ')}</span></div>`;
+        window.handleGuestSignIn = function() {
+            closeAuthModal();
+            showToast("Continuing in Guest Mode", "info");
+        };
 
-            if(val === vaultSecret) {
-                document.getElementById('vault-digit-0').innerText = vaultSecret[0];
-                document.getElementById('vault-digit-1').innerText = vaultSecret[1];
-                document.getElementById('vault-digit-2').innerText = vaultSecret[2];
-                document.getElementById('vault-feedback').innerHTML = `<span class="text-emerald-400 font-bold">Vault Unlocked Successfully! +60 XP</span>`;
-                addXP(60);
-            } else if(vaultAttempts <= 0) {
-                document.getElementById('vault-feedback').innerHTML = `<span class="text-rose-500 font-bold">Vault Locked Out! The code was ${vaultSecret}.</span>`;
+        window.handleSignOut = async function() {
+            await signOut(auth);
+            window.appState.user = null;
+            loadUserData(null);
+            showToast("Signed out", "info");
+        };
+
+        // Navigation Switching
+        window.switchTab = function(tabName) {
+            playSfx('click');
+            document.querySelectorAll('.view-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`view-${tabName}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn px-5 py-2 rounded-full text-sm font-semibold text-gray-400 hover:text-white transition-all duration-300";
+            });
+            const activeBtn = document.getElementById(`nav-${tabName}`);
+            if (activeBtn) {
+                activeBtn.className = "nav-btn px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 text-white bg-ryzer-maroon/60 border border-ryzer-crimson/30";
             }
-        }
+        };
 
-        // Game 3: Reflex Tap Logic
-        let reflexTimer = 10.0;
-        let reflexScore = 0;
+        window.openAuthModal = function() { document.getElementById('auth-modal').classList.remove('hidden'); };
+        window.closeAuthModal = function() { document.getElementById('auth-modal').classList.add('hidden'); };
+
+        let secretAiNumber = Math.floor(Math.random() * 100) + 1;
+        let aiGuessMin = 1, aiGuessMax = 100, currentAiGuess = 50;
+
+        window.setGuessMode = function(mode) {
+            playSfx('click');
+            if (mode === 'user-guesses') {
+                document.getElementById('guess-mode-1-box').classList.remove('hidden');
+                document.getElementById('guess-mode-2-box').classList.add('hidden');
+                document.getElementById('guess-mode-1-btn').className = "px-4 py-2 rounded-xl text-xs font-bold bg-ryzer-crimson text-white border border-ryzer-crimson";
+                document.getElementById('guess-mode-2-btn').className = "px-4 py-2 rounded-xl text-xs font-bold bg-ryzer-card text-gray-400 hover:text-white border border-ryzer-crimson/20";
+            } else {
+                document.getElementById('guess-mode-1-box').classList.add('hidden');
+                document.getElementById('guess-mode-2-box').classList.remove('hidden');
+                document.getElementById('guess-mode-2-btn').className = "px-4 py-2 rounded-xl text-xs font-bold bg-ryzer-crimson text-white border border-ryzer-crimson";
+                document.getElementById('guess-mode-1-btn').className = "px-4 py-2 rounded-xl text-xs font-bold bg-ryzer-card text-gray-400 hover:text-white border border-ryzer-crimson/20";
+            }
+        };
+
+        window.submitUserGuess = function() {
+            const val = parseInt(document.getElementById('user-guess-input').value);
+            const feedback = document.getElementById('guess-mode-1-feedback');
+            if (!val || val < 1 || val > 100) {
+                feedback.innerHTML = `<span class="text-red-400 font-bold">Please enter a valid number between 1 and 100.</span>`;
+                playSfx('error');
+                return;
+            }
+
+            if (val === secretAiNumber) {
+                feedback.innerHTML = `<span class="text-green-400 font-bold">🎉 Phenomenal! You guessed ${secretAiNumber} correctly!</span>`;
+                addXP(50, "Solved AI Guess");
+                secretAiNumber = Math.floor(Math.random() * 100) + 1;
+            } else if (val < secretAiNumber) {
+                feedback.innerHTML = `Higher 🔥! Riz says the target is greater than ${val}.`;
+                playSfx('click');
+            } else {
+                feedback.innerHTML = `Lower ❄️! Riz says the target is less than ${val}.`;
+                playSfx('click');
+            }
+        };
+
+        window.startAiGuessingGame = function() {
+            aiGuessMin = 1; aiGuessMax = 100;
+            currentAiGuess = Math.floor((aiGuessMin + aiGuessMax) / 2);
+            document.getElementById('ai-guess-start-view').classList.add('hidden');
+            document.getElementById('ai-guess-active-view').classList.remove('hidden');
+            document.getElementById('ai-guess-prompt-text').innerText = `Is your secret number ${currentAiGuess}?`;
+        };
+
+        window.respondAiGuess = function(response) {
+            playSfx('click');
+            if (response === 'correct') {
+                document.getElementById('ai-guess-prompt-text').innerText = `🤖 Riz: "I guessed it! Your number was ${currentAiGuess}!"`;
+                addXP(30, "AI Outsmarted");
+                setTimeout(() => {
+                    document.getElementById('ai-guess-start-view').classList.remove('hidden');
+                    document.getElementById('ai-guess-active-view').classList.add('hidden');
+                }, 2500);
+            } else if (response === 'lower') {
+                aiGuessMax = currentAiGuess - 1;
+                currentAiGuess = Math.floor((aiGuessMin + aiGuessMax) / 2);
+                document.getElementById('ai-guess-prompt-text').innerText = `Is your secret number ${currentAiGuess}?`;
+            } else if (response === 'higher') {
+                aiGuessMin = currentAiGuess + 1;
+                currentAiGuess = Math.floor((aiGuessMin + aiGuessMax) / 2);
+                document.getElementById('ai-guess-prompt-text').innerText = `Is your secret number ${currentAiGuess}?`;
+            }
+        };
+
+        let secretVaultCode = [0, 0, 0];
+        let currentVaultDigits = [0, 0, 0];
+        let vaultAttemptsRemaining = 7;
+
+        window.initCipherVault = function() {
+            secretVaultCode = [
+                Math.floor(Math.random() * 10),
+                Math.floor(Math.random() * 10),
+                Math.floor(Math.random() * 10)
+            ];
+            currentVaultDigits = [0, 0, 0];
+            vaultAttemptsRemaining = 7;
+            document.getElementById('digit-0').innerText = '0';
+            document.getElementById('digit-1').innerText = '0';
+            document.getElementById('digit-2').innerText = '0';
+            document.getElementById('vault-attempts').innerText = vaultAttemptsRemaining;
+            document.getElementById('vault-thermal-status').innerHTML = `Proximity: <strong class="text-yellow-400">Neutral</strong>`;
+            document.getElementById('cipher-log').innerHTML = `<p class="text-gray-500 italic">Vault lock recalibrated. Enter code.</p>`;
+        };
+
+        window.changeDigit = function(index, delta) {
+            playSfx('click');
+            currentVaultDigits[index] = (currentVaultDigits[index] + delta + 10) % 10;
+            document.getElementById(`digit-${index}`).innerText = currentVaultDigits[index];
+        };
+
+        window.submitCipherUnlock = function() {
+            if (vaultAttemptsRemaining <= 0) return;
+
+            let exactMatches = 0;
+            let diffSum = 0;
+
+            for (let i = 0; i < 3; i++) {
+                if (currentVaultDigits[i] === secretVaultCode[i]) exactMatches++;
+                diffSum += Math.abs(currentVaultDigits[i] - secretVaultCode[i]);
+            }
+
+            vaultAttemptsRemaining--;
+            document.getElementById('vault-attempts').innerText = vaultAttemptsRemaining;
+
+            const log = document.getElementById('cipher-log');
+            const entry = document.createElement('div');
+
+            if (exactMatches === 3) {
+                entry.className = "text-green-400 font-bold";
+                entry.innerText = `[SUCCESS] Code ${currentVaultDigits.join('')} - ACCESS GRANTED!`;
+                log.prepend(entry);
+                playSfx('win');
+                window.appState.stats.vaultsCleared++;
+                addXP(75, "Vault Solved");
+                initCipherVault();
+                return;
+            }
+
+            let proximityText = diffSum <= 3 ? '<strong class="text-red-500 animate-pulse">SCORCHING HOT 🔥</strong>' : diffSum <= 6 ? '<strong class="text-amber-400">WARM ⚡</strong>' : '<strong class="text-blue-400">COLD ❄️</strong>';
+            document.getElementById('vault-thermal-status').innerHTML = `Proximity: ${proximityText}`;
+
+            entry.className = "text-gray-300";
+            entry.innerText = `[ATTEMPT] Code ${currentVaultDigits.join('')} -> ${exactMatches} Exact Digits Correct.`;
+            log.prepend(entry);
+
+            if (vaultAttemptsRemaining <= 0) {
+                showToast(`Vault Breach Failed! Correct code was ${secretVaultCode.join('')}`, "warning");
+                playSfx('error');
+            }
+        };
+
+        let reflexClicksCount = 0;
+        let reflexTimerInterval = null;
+        let reflexTimeLeft = 10.0;
         let reflexActive = false;
-        let reflexInterval = null;
-        let bestReflex = parseInt(localStorage.getItem('ryzer_best_reflex') || '0');
-        document.getElementById('reflex-best').innerText = bestReflex + ' Taps';
 
-        function startReflexGame() {
-            reflexTimer = 10.0;
-            reflexScore = 0;
-            reflexActive = true;
-            document.getElementById('reflex-score').innerText = reflexScore;
-            document.getElementById('reflex-timer').innerText = reflexTimer.toFixed(1) + 's';
-            document.getElementById('reflex-start-btn').classList.add('hidden');
-            
-            const btn = document.getElementById('reflex-target-btn');
-            btn.removeAttribute('disabled');
-            btn.classList.remove('cursor-not-allowed', 'opacity-80');
-            document.getElementById('reflex-btn-text').innerText = "TAP RAPIDLY NOW!";
-
-            if(reflexInterval) clearInterval(reflexInterval);
-            reflexInterval = setInterval(() => {
-                reflexTimer -= 0.1;
-                document.getElementById('reflex-timer').innerText = Math.max(0, reflexTimer).toFixed(1) + 's';
-                if(reflexTimer <= 0) {
-                    clearInterval(reflexInterval);
-                    reflexActive = false;
-                    btn.setAttribute('disabled', 'true');
-                    btn.classList.add('cursor-not-allowed', 'opacity-80');
-                    document.getElementById('reflex-start-btn').classList.remove('hidden');
-                    document.getElementById('reflex-btn-text').innerText = "Challenge Finished!";
-                    
-                    if(reflexScore > bestReflex) {
-                        bestReflex = reflexScore;
-                        localStorage.setItem('ryzer_best_reflex', bestReflex);
-                        document.getElementById('reflex-best').innerText = bestReflex + ' Taps';
+        window.handleReflexClick = function() {
+            if (!reflexActive && reflexTimeLeft === 10.0) {
+                reflexActive = true;
+                document.getElementById('reflex-btn-label').innerText = "TAP FAST!";
+                reflexTimerInterval = setInterval(() => {
+                    reflexTimeLeft -= 0.1;
+                    if (reflexTimeLeft <= 0) {
+                        finishReflexGame();
+                    } else {
+                        document.getElementById('reflex-timer').innerText = `${reflexTimeLeft.toFixed(1)}s`;
+                        const liveCps = reflexClicksCount / (10 - reflexTimeLeft);
+                        document.getElementById('reflex-cps').innerText = liveCps.toFixed(1);
                     }
-                    addXP(reflexScore * 2);
-                    showToast(`Reflex Challenge Ended! Score: ${reflexScore} Taps. +${reflexScore * 2} XP`);
-                }
-            }, 100);
-        }
-
-        function tapReflexButton() {
-            if(!reflexActive) return;
-            reflexScore++;
-            document.getElementById('reflex-score').innerText = reflexScore;
-        }
-
-        // Game 4: Memory Matrix Logic
-        let memoryLevel = 1;
-        let memorySequence = [];
-        let playerSequence = [];
-        let memoryPlaying = false;
-
-        function startMemoryGame() {
-            memoryLevel = 1;
-            document.getElementById('memory-level').innerText = `Level ${memoryLevel}`;
-            document.getElementById('memory-start-btn').classList.add('hidden');
-            nextMemoryRound();
-        }
-
-        function nextMemoryRound() {
-            playerSequence = [];
-            memorySequence = [];
-            const count = memoryLevel + 2;
-            for(let i=0; i<count; i++) {
-                memorySequence.push(Math.floor(Math.random() * 9));
+                }, 100);
             }
-            playMemorySequence();
+
+            if (reflexActive) {
+                playSfx('click');
+                reflexClicksCount++;
+                document.getElementById('reflex-clicks').innerText = reflexClicksCount;
+            }
+        };
+
+        function finishReflexGame() {
+            clearInterval(reflexTimerInterval);
+            reflexActive = false;
+            reflexTimeLeft = 0;
+            document.getElementById('reflex-timer').innerText = "0.0s";
+            
+            const finalCps = reflexClicksCount / 10.0;
+            document.getElementById('reflex-cps').innerText = finalCps.toFixed(1);
+            
+            if (finalCps > window.appState.stats.peakCPS) {
+                window.appState.stats.peakCPS = finalCps;
+            }
+
+            const xpEarned = Math.round(finalCps * 10);
+            addXP(xpEarned, `${finalCps.toFixed(1)} CPS Speed`);
+
+            document.getElementById('reflex-results-box').classList.remove('hidden');
+            document.getElementById('reflex-summary-text').innerText = `You registered ${reflexClicksCount} total taps with a peak rate of ${finalCps.toFixed(1)} CPS!`;
         }
 
-        function playMemorySequence() {
-            memoryPlaying = true;
-            document.getElementById('memory-status').innerText = "Watch the glowing pattern...";
+        window.resetReflexGame = function() {
+            clearInterval(reflexTimerInterval);
+            reflexActive = false;
+            reflexTimeLeft = 10.0;
+            reflexClicksCount = 0;
+            document.getElementById('reflex-timer').innerText = "10.0s";
+            document.getElementById('reflex-clicks').innerText = "0";
+            document.getElementById('reflex-cps').innerText = "0.0";
+            document.getElementById('reflex-btn-label').innerText = "TAP TO START";
+            document.getElementById('reflex-results-box').classList.add('hidden');
+        };
+
+        let matrixSequence = [];
+        let playerSequence = [];
+        let matrixRound = 1;
+        let matrixPlayingSequence = false;
+
+        window.startMatrixGame = function() {
+            matrixSequence = [];
+            playerSequence = [];
+            matrixRound = 1;
+            nextMatrixRound();
+        };
+
+        function nextMatrixRound() {
+            playerSequence = [];
+            document.getElementById('matrix-level').innerText = matrixRound;
+            document.getElementById('matrix-status').innerText = "Observe Sequence...";
+            document.getElementById('matrix-status').className = "text-amber-400 font-bold";
+
+            // Add random tile (0-8)
+            matrixSequence.push(Math.floor(Math.random() * 9));
+            playMatrixSequence();
+        }
+
+        function playMatrixSequence() {
+            matrixPlayingSequence = true;
             let i = 0;
             const interval = setInterval(() => {
-                if(i < memorySequence.length) {
-                    highlightCell(memorySequence[i]);
-                    i++;
-                } else {
+                if (i >= matrixSequence.length) {
                     clearInterval(interval);
-                    memoryPlaying = false;
-                    document.getElementById('memory-status').innerText = "Your turn! Repeat the pattern.";
+                    matrixPlayingSequence = false;
+                    document.getElementById('matrix-status').innerText = "Your Turn!";
+                    document.getElementById('matrix-status').className = "text-green-400 font-bold";
+                    return;
                 }
-            }, 700);
+                flashMatrixTile(matrixSequence[i]);
+                i++;
+            }, 600);
         }
 
-        function highlightCell(index) {
-            const cell = document.querySelector(`[data-index="${index}"]`);
-            if(cell) {
-                cell.classList.add('bg-rose-600', 'shadow-lg', 'shadow-rose-600/50');
-                setTimeout(() => {
-                    cell.classList.remove('bg-rose-600', 'shadow-lg', 'shadow-rose-600/50');
-                }, 400);
-            }
+        function flashMatrixTile(index) {
+            const tile = document.querySelector(`.matrix-tile[data-index="${index}"]`);
+            if (!tile) return;
+            tile.classList.add('bg-ryzer-crimson', 'shadow-lg', 'shadow-ryzer-crimson');
+            playSfx('click');
+            setTimeout(() => {
+                tile.classList.remove('bg-ryzer-crimson', 'shadow-lg', 'shadow-ryzer-crimson');
+            }, 350);
         }
 
-        function clickMemoryCell(index) {
-            if(memoryPlaying) return;
-            highlightCell(index);
+        window.handleMatrixTileClick = function(index) {
+            if (matrixPlayingSequence || matrixSequence.length === 0) return;
+
+            flashMatrixTile(index);
             playerSequence.push(index);
 
-            const currentIndex = playerSequence.length - 1;
-            if(playerSequence[currentIndex] !== memorySequence[currentIndex]) {
-                document.getElementById('memory-status').innerText = "Incorrect pattern! Game Over. Try again.";
-                document.getElementById('memory-start-btn').classList.remove('hidden');
+            // Check correctness
+            const currentStep = playerSequence.length - 1;
+            if (playerSequence[currentStep] !== matrixSequence[currentStep]) {
+                document.getElementById('matrix-status').innerText = "Wrong Pattern! Game Over";
+                document.getElementById('matrix-status').className = "text-red-500 font-bold";
+                playSfx('error');
+                matrixSequence = [];
                 return;
             }
 
-            if(playerSequence.length === memorySequence.length) {
-                memoryLevel++;
-                document.getElementById('memory-level').innerText = `Level ${memoryLevel}`;
-                document.getElementById('memory-status').innerText = "Correct! Loading next level...";
-                addXP(30 * memoryLevel);
-                setTimeout(nextMemoryRound, 1200);
+            if (playerSequence.length === matrixSequence.length) {
+                addXP(20 * matrixRound, `Matrix Level ${matrixRound} Clear`);
+                matrixRound++;
+                setTimeout(nextMatrixRound, 1000);
             }
+        };
+
+        // Game Hub Launcher
+        window.launchGame = function(gameKey) {
+            switchTab('arcade');
+            document.querySelectorAll('.game-stage').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`game-container-${gameKey}`).classList.remove('hidden');
+
+            document.querySelectorAll('.game-select-btn').forEach(btn => {
+                btn.className = "game-select-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-gray-400 hover:text-white flex items-center gap-2";
+            });
+            const activeTab = document.getElementById(`game-tab-${gameKey}`);
+            if (activeTab) {
+                activeTab.className = "game-select-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-ryzer-maroon text-white border border-ryzer-crimson/40";
+            }
+
+            if (gameKey === 'cipher') initCipherVault();
+        };
+
+        const tourSteps = [
+            { title: "WELCOME TO RYZER'S.AI", desc: "I am Riz, your dedicated synthetic AI guide. Let me introduce you to our luxury gaming ecosystem!" },
+            { title: "CYBER ARCADE GAMES", desc: "Enjoy 4 fully featured interactive games: Guess AI, Cipher Vault Cracker, Reflex Tap, and Memory Matrix." },
+            { title: "EARN CREATOR XP", desc: "Play games, solve security puzzles, and complete achievements to gain XP and unlock higher Creator Ranks!" },
+            { title: "CREATOR ROADMAP", desc: "Upvote upcoming features or propose your own tools to shape the evolution of Ryzer's.ai." }
+        ];
+        let currentTourStep = 0;
+
+        window.triggerRizTour = function() {
+            currentTourStep = 0;
+            renderTourStep();
+            document.getElementById('riz-tour-modal').classList.remove('hidden');
+        };
+
+        function renderTourStep() {
+            const step = tourSteps[currentTourStep];
+            document.getElementById('tour-step-title').innerText = step.title;
+            document.getElementById('tour-step-desc').innerText = step.desc;
+            document.getElementById('tour-step-indicator').innerText = `Step ${currentTourStep + 1} of ${tourSteps.length}`;
+            document.getElementById('tour-next-btn').innerText = currentTourStep === tourSteps.length - 1 ? "Finish Tour" : "Next Step";
         }
 
-        // Roadmap upvoting
-        function upvoteFeature(btn) {
-            let countSpan = btn.parentElement.querySelector('span');
-            let text = countSpan.innerText;
-            let current = parseInt(text.replace(/[^0-9]/g, ''));
-            current++;
-            countSpan.innerHTML = `<i class="fa-solid fa-arrow-up text-rose-500 mr-1"></i> ${current} upvotes`;
-            btn.innerText = "Upvoted ✓";
-            btn.setAttribute('disabled', 'true');
-            showToast("Feature upvoted successfully!");
-        }
+        window.nextTourStep = function() {
+            if (currentTourStep < tourSteps.length - 1) {
+                currentTourStep++;
+                renderTourStep();
+            } else {
+                skipTour();
+            }
+        };
 
-        function openSuggestModal() {
-            showToast("Feature suggestion board open! Submit ideas in community chat.");
-        }
+        window.skipTour = function() {
+            document.getElementById('riz-tour-modal').classList.add('hidden');
+        };
 
-        // Toast Notification System
-        function showToast(msg) {
-            const existing = document.getElementById('toast-notification');
-            if(existing) existing.remove();
+        window.toggleRizChat = function() {
+            const chat = document.getElementById('riz-chat-modal');
+            chat.classList.toggle('hidden');
+            document.getElementById('riz-bubble-hint').classList.add('hidden');
+        };
 
-            const toast = document.createElement('div');
-            toast.id = 'toast-notification';
-            toast.className = 'fixed bottom-6 right-6 z-50 glass-panel bg-[#120712]/95 border border-rose-500/50 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 animate-bounce';
-            toast.innerHTML = `<i class="fa-solid fa-bell text-rose-500"></i><span class="text-xs font-bold">${msg}</span>`;
-            document.body.appendChild(toast);
+        window.openRizChat = function() {
+            document.getElementById('riz-chat-modal').classList.remove('hidden');
+            document.getElementById('riz-bubble-hint').classList.add('hidden');
+        };
 
+        window.sendQuickPrompt = function(promptText) {
+            document.getElementById('riz-chat-input').value = promptText;
+            handleRizChatSubmit(new Event('submit'));
+        };
+
+        window.handleRizChatSubmit = function(e) {
+            if (e) e.preventDefault();
+            const input = document.getElementById('riz-chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chatMessages = document.getElementById('riz-chat-messages');
+
+            // Append User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = "flex items-start gap-2 justify-end";
+            userMsg.innerHTML = `<div class="bg-ryzer-maroon text-white p-3 rounded-2xl rounded-tr-none max-w-[80%]">${text}</div>`;
+            chatMessages.appendChild(userMsg);
+
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Generate Automated AI Response
             setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 500);
-            }, 3500);
-        }
+                let reply = "I am processing your query across the Ryzer neural network!";
+                const query = text.toLowerCase();
+                if (query.includes('xp') || query.includes('level')) {
+                    reply = "You can earn XP by playing any of our 4 Cyber Arcade games! Level progression increases automatically every 200 XP.";
+                } else if (query.includes('cipher') || query.includes('vault') || query.includes('hint')) {
+                    reply = "In the Cipher Vault, pay close attention to thermal proximity! SCORCHING HOT means your numbers are within 3 digits of the secret combination.";
+                } else if (query.includes('riz')) {
+                    reply = "I am Riz, the resident AI assistant of Ryzer's.ai! I help creators navigate arcade challenges and store stats securely in Firestore.";
+                }
+
+                const botMsg = document.createElement('div');
+                botMsg.className = "flex items-start gap-2";
+                botMsg.innerHTML = `
+                    <div class="w-6 h-6 rounded-md bg-ryzer-maroon flex items-center justify-center shrink-0 text-white font-bold text-[10px]">RIZ</div>
+                    <div class="bg-ryzer-card border border-ryzer-crimson/20 p-3 rounded-2xl rounded-tl-none text-gray-200 max-w-[80%]">${reply}</div>
+                `;
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                playSfx('click');
+            }, 600);
+        };
+
+        window.voteRoadmapItem = function(id) {
+            if (window.appState.votedItems.has(id)) {
+                showToast("You already voted for this feature!", "info");
+                return;
+            }
+            window.appState.votedItems.add(id);
+            window.appState.roadmapVotes[id] = (window.appState.roadmapVotes[id] || 0) + 1;
+            document.getElementById(`roadmap-votes-${id}`).innerText = window.appState.roadmapVotes[id];
+            showToast("Vote recorded! Thank you for supporting creator updates.", "success");
+            playSfx('win');
+        };
+
+        window.showFeatureProposalModal = function() {
+            showToast("Proposal submission submitted to admin queue!", "success");
+        };
+
+        // Initialize icons on load
+        window.onload = function() {
+            lucide.createIcons();
+            initCipherVault();
+        };
     </script>
 </body>
 </html>
